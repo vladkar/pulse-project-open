@@ -1,0 +1,3 @@
+Language;Ok;Cancel;Information
+en;Ok;Cancel;Are you sure?
+de;Ok;Absagen;Sind sie sicher?

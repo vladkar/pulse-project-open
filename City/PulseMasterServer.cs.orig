@@ -1,0 +1,371 @@
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Fusion.Engine.Common;
+using Fusion;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Reflection;
+using System.Threading;
+using City.ControlsClient;
+using City.ControlsServer;
+using City.Snapshot;
+using Fusion.Engine.Server;
+using Newtonsoft.Json;
+using Pulse.Common.ConfigSystem;
+using Pulse.Common.Engine;
+using Pulse.Common.Model.Agent;
+using Pulse.Common.Model.Environment.World;
+using Pulse.Common.Utils;
+using Pulse.Model;
+using Pulse.Model.Agents;
+using Pulse.Model.Environment;
+
+namespace City
+{
+    class PulseMasterServer : GameServer
+    {
+        private EnumElement _state;
+        private IDictionary<int, IPulseServer> _controls;
+        private IDictionary<int, ControlInfo> _config;
+
+        public string Map { get; protected set; }
+
+
+        public PulseMasterServer(Game gameEngine) : base(gameEngine)
+        {
+            _state = PulseRunnerState.NotInitialized;
+            _controls = new ConcurrentDictionary<int, IPulseServer>();
+            _config = new ConcurrentDictionary<int, ControlInfo>();
+        }
+
+
+        public override void Initialize()
+        {
+            _state = PulseRunnerState.Initializing;
+
+            
+
+            _state = PulseRunnerState.Initialized;
+        }
+
+        public override void LoadContent(string map)
+        {
+            _state = PulseRunnerState.Loading;
+            Map = map;
+
+            ConfigureLevel(map);
+
+//            _snapshotUtil = new SnapshotUtil(GetServerInfo());
+
+            foreach (var control in _controls.Values)
+                control.Initialize();
+
+            _controls.AsParallel().ForAll(c => c.Value.LoadLevel(_config[c.Key]));
+
+            _state = PulseRunnerState.Loaded;
+        }
+
+//        private SnapshotUtil _snapshotUtil;
+
+        private void ConfigureLevel(string map)
+        {
+            switch (map.ToLower())
+            {
+                case "simple_test28":
+                case "krestovsky":
+                case "novokrest":
+                case "hospital":
+                    _controls[1] = new PulseServer(1);
+                    _config[1] = new ControlInfo { Id = 1, Name = GlobalStrings.PulseAgentControl, Scenario = map };
+                    break;
+
+                case "simpletraffic":
+                case "almazovskiy":
+                    _controls[1] = new TrafficServer();
+                    _config[1] = new ControlInfo { Id = 1, Name = GlobalStrings.TrafficAgentControl, Scenario = map };
+                    break;
+
+                case "megakrest":
+                    var id1 = 1;
+                    _controls[id1] = new PulseServer(id1);
+                    _config[id1] = new ControlInfo { Id = id1, Name = GlobalStrings.PulseAgentControl, Scenario = "novokrest" };
+
+                    var id2 = 2;
+                    _controls[id2] = new PulseServer(id2);
+                    _config[id2] = new ControlInfo { Id = id2, Name = GlobalStrings.PulseAgentControl, Scenario = "krestovsky" };
+
+                    var id3 = 3;
+                    _config[id3] = new ControlInfo { Id = id3, Name = "fms", Scenario = "fms" };
+
+                    break;
+
+                case "mmkrest":
+                    id1 = 1;
+                    _controls[id1] = new PulseServer(id1);
+                    _config[id1] = new ControlInfo { Id = id1, Name = GlobalStrings.PulseAgentControl, Scenario = "novokrest", Panels = new[]{1, 2} };
+
+                    id2 = 2;
+                    _controls[id2] = new PulseServer(id2);
+                    _config[id2] = new ControlInfo { Id = id2, Name = GlobalStrings.PulseAgentControl, Scenario = "krestovsky", Panels = new[] { 2 } };
+
+//                    id3 = 3;
+//                    _config[id3] = new ControlInfo { Id = id3, Name = "fms", Scenario = "fms", Panels = new[] { 2, 3 } };
+
+                    break;
+
+                case "krest":
+                    id2 = 1;
+                    _controls[id2] = new PulseServer(id2);
+                    _config[id2] = new ControlInfo { Id = id2, Name = GlobalStrings.PulseAgentControl, Scenario = "krestovsky", Panels = new[] { 1, 2, 3, 4 } };
+//                    id2 = 2;
+//                    _config[id2] = new ControlInfo { Id = id2, Name = "fms", Scenario = "fms", Panels = new []{1}};
+                    break;
+
+
+                case "whore":
+                    var wid = 1;
+                    _config[wid] = new ControlInfo { Id = wid, Name = "whores", Scenario = "whores" , Panels = new int[1] { 1 }};
+                    break;
+
+                case "fms":
+                    var fid = 1;
+                    _config[fid] = new ControlInfo { Id = fid, Name = "fms", Scenario = "fms" };
+                    break;
+
+                case "inst":
+                    var iid = 1;
+                    _config[iid] = new ControlInfo { Id = iid, Name = "inst", Scenario = "inst", Panels = new int[1] { 1 }};
+                    break;
+
+                case "sent":
+                    var sid = 1;
+<<<<<<< HEAD
+//                    _config[1] = new ControlInfo {Id = 1, Name = GlobalStrings.PulseAgentControl, Scenario = "krestovsky", Panels = new int[] {1}};
+//                    _controls[1] = new PulseServer(1);
+                    _config[2] = new ControlInfo {Id = 2, Name = "sent", Scenario = "sent", Panels = new int[] {2}};
+                    _config[3] = new ControlInfo {Id = 3, Name = "sent", Scenario = "sent", Panels = new int[] {3}};
+                    _config[4] = new ControlInfo {Id = 4, Name = "sent", Scenario = "sent", Panels = new int[] {4}};
+=======
+                    _config[1] = new ControlInfo {Id = 1, Name = "sent", Scenario = "sent", Panels = new int[] {1}};
+                    _config[2] = new ControlInfo {Id = 2, Name = "inst", Scenario = "inst", Panels = new int[] {2}};
+                    _config[3] = new ControlInfo {Id = 3, Name = "sent", Scenario = "sent", Panels = new int[] {3}};
+                    _config[4] = new ControlInfo {Id = 4, Name = "inst", Scenario = "inst", Panels = new int[] {4}};
+>>>>>>> origin/panel-framework
+                    break;
+
+                case "emercall":
+                    var eid = 1;
+                    _config[eid] = new ControlInfo { Id = eid, Name = "emercall", Scenario = "emercall" };
+                    break;
+
+                case "calls":
+                    var clid = 1;
+                    _config[clid] = new ControlInfo { Id = clid, Name = "calls", Scenario = "calls" };
+                    break;
+
+                case "dincalls":
+                    var dclid = 1;
+                    _config[dclid] = new ControlInfo { Id = dclid, Name = "dincalls", Scenario = "dincalls" };
+                    break;
+
+                case "survcam":
+                    sid = 1;
+                    _config[sid] = new ControlInfo { Id = sid, Name = "survcam", Scenario = "survcam" };
+
+                    break;
+
+                case "subway":
+                    var sub = 1;
+                    _config[sub] = new ControlInfo { Id = sub, Name = "subway", Scenario = "subway", Panels = new []{1}};
+                    break;
+
+                case "data":
+//                    _config[1] = new ControlInfo { Id = 1, Name = "emercall", Scenario = "emercall" };
+                    _config[2] = new ControlInfo { Id = 2, Name = "subway", Scenario = "subway", Panels = new int[] { 1 } };
+                    _config[3] = new ControlInfo { Id = 3, Name = "whores", Scenario = "whores", Panels = new int[] { 2 } };
+                    _config[4] = new ControlInfo { Id = 4, Name = "survcam", Scenario = "survcam", Panels = new int[] { 3 } };
+                    //_config[5] = new ControlInfo { Id = 5, Name = "fms", Scenario = "fms" };
+//                    _config[6] = new ControlInfo { Id = 6, Name = "subway", Scenario = "subway" };
+                    break;
+
+                default:
+                    throw new Exception($"Scenario {map} not found");
+            }
+        }
+
+        public override void UnloadContent()
+        {
+            _state = PulseRunnerState.Unloading;
+
+            foreach (var control in _controls.Values)
+                control.UnloadLevel();
+
+            _state = PulseRunnerState.Finished;
+        }
+
+        // TODO write subsnapshot offsets
+        // snapshot
+        // header: byte: count of controls(from 0 to byte.MaxValue)
+        // key: byte: id, int: len
+        // value: custom
+        public override byte[] Update(GameTime gameTime)
+        {
+            if (_state.Key < PulseRunnerState.Loaded.Key) return new byte[0];
+
+            foreach (var control in _controls.Values.OfType<PulseServer>())
+            {
+                var ceshts = control.GetExchangeCnaphot();
+//                if (ceshts != nulll)
+                foreach (var cesht in ceshts.Values)
+                {
+                    FeedExchangeCnaphot(cesht);
+                }
+            }
+
+
+            using (var commandStream = new MemoryStream())
+            {
+                using (var sw = new BinaryWriter(commandStream))
+                {
+                    // Header
+                    sw.Write((byte)_controls.Count);
+
+                    foreach (var control in _controls)
+                    {
+                        var snapshot = control.Value.Update();
+
+                        // Key
+                        sw.Write((byte)control.Key);
+                        // Len
+                        sw.Write(snapshot.Length);
+                        // Body
+                        sw.Write(snapshot);
+                    }
+                }
+
+                var completeSnapshot = commandStream.ToArray();
+                return completeSnapshot;
+            }
+        }
+        
+        public override void FeedCommand(string id, byte[] userCommand)
+        {
+            if (_state == PulseRunnerState.Loaded)
+            {
+
+                _state = PulseRunnerState.Running;
+            }
+        }
+
+        public override void FeedNotification(string id, string message)
+        {
+        Log.Message("NOTIFICATION {0}: {1}", id, message);
+			NotifyClients("{0} says: {1}", id, message);
+        }
+
+        public override string ServerInfo()
+        {
+            return JsonConvert.SerializeObject(GetServerInfo());
+        }
+
+        private ServerInfo GetServerInfo()
+        {
+            return new ServerInfo {State = _state.Key, Scenario = Map, Controls = _config};
+        }
+
+        public override void ClientConnected(string id, string userInfo)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override void ClientDisconnected(string id, string userInfo)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override bool ApproveClient(string id, string userInfo, out string reason)
+        {
+            Log.Message("APPROVE: {0} {1}", id, userInfo);
+			reason = ".";
+			return true;
+        }
+
+        public void FeedExchangeCnaphot(IExchangeSnapshot snapshot)
+        {
+            if (!_controls.ContainsKey(snapshot.DestinationServer))
+            {
+                //throw new Exception($"Server control {snapshot.DestinationServer} not found for scenatio {Map}");
+                Log.Warning($"Server control {snapshot.DestinationServer} as destination for agent teleport not found for scenatio {Map}");
+                return;
+            }
+
+            var icontrol = _controls[snapshot.DestinationServer] as PulseServer;
+            if (icontrol == null)
+            {
+                //throw new Exception($"Server control {snapshot.DestinationServer} for scenatio {Map} is not interactive: cannot feed server snapshot");
+                Log.Warning($"Server control {snapshot.DestinationServer} as destination for agent teleport for scenatio {Map} is not interactive: cannot feed server snapshot");
+                return;
+            }
+
+            icontrol.FeedExchangeCnaphot(snapshot);
+        }
+	}
+
+    public class ServerInfo
+    {
+        public int State { set; get; }
+        public string Scenario { set; get; }
+        public IDictionary<int, ControlInfo> Controls { set; get; } 
+    }
+
+    public class ControlInfo
+    {
+        public int Id { set; get; }
+        public string Name { set; get; }
+        public string Scenario { set; get; }
+        public int[] Panels { set; get; }
+    }
+
+    public static class PulseRunnerState
+    {
+        public static EnumElement NotInitialized { get; }
+        public static EnumElement Initializing { get; }
+        public static EnumElement Initialized { get; set; }
+        public static EnumElement Loading { get; set; }
+        public static EnumElement Loaded { get; set; }
+        public static EnumElement Running { get; }
+        public static EnumElement Error { get; private set; }
+        public static EnumElement Paused { get; }
+        public static EnumElement Unloading { get; set; }
+        public static EnumElement Finished { get; set; }
+
+        private static EnumElement[] _fields;
+
+        static PulseRunnerState()
+        {
+            NotInitialized = new EnumElement { Key = 1, Value = "NotInitialized" };
+            Initializing = new EnumElement { Key = 2, Value = "Initializing" };
+            Initialized = new EnumElement { Key = 3, Value = "Initialized" };
+            Loading = new EnumElement { Key = 4, Value = "Loading" };
+            Loaded = new EnumElement { Key = 5, Value = "Loaded" };
+            Running = new EnumElement { Key = 6, Value = "Running" };
+            Paused = new EnumElement { Key = 7, Value = "Paused" };
+            Unloading = new EnumElement { Key = 8, Value = "Unloading" };
+            Finished = new EnumElement { Key = 9, Value = "Finished" };
+            Error = new EnumElement { Key = 10, Value = "Error" };
+
+            _fields = typeof(PulseRunnerState).GetFields(BindingFlags.Public).Select(f => f.GetValue(null) as EnumElement).Where(e => e != null).ToArray();
+        }
+
+        public static EnumElement GetState(int id)
+        {
+            return _fields.First(f => f.Key == id);
+        }
+    }
+}

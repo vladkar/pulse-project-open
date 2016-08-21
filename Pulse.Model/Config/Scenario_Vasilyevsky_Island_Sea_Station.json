@@ -1,0 +1,45 @@
+﻿{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+    "ScenarioName": "Vasilievsky Island, Saint-Petersburg, Submodel",
+    "VisName": "СПб В/О   ^2Морской порт",
+    "DataSubDirectory": "VO",
+
+    "TimeStep": 1,
+    "ToSecondsMultiplier": 1,
+    "TimeStart": "2015-10-7T12:00:00.000+03:00",
+
+    "InitialPopulation": 0,
+
+    "MapPointDL": { "X": 0, "Y": 0 },
+    "MapPointUR": { "X": 10000, "Y": 10000 },
+    "ToMetersMultiplier": 1,
+    "GeoPointDL": { "Lat": 59.91612718594394, "Lon": 30.15506603759737 },
+    "GeoPointUR": { "Lat": 59.96672508267804, "Lon": 30.32432415527608 },
+    "PreferredCoordinates": "geo",
+
+    "SimulationType": "Vasilyevsky",
+
+    "MovementSystems": {
+        "Pedestrian" : "Simple",
+        "Vehicle" : "Traffic_Model"
+    },
+
+    "Plugins": {
+        "SimpleInfection": {
+            "InfectionName": "ebolavirus",
+            "InfectionInitialization":  "null"
+        },
+        "Traffic": { },
+
+        "SubModel": {
+            "Type": "SeaStationRough",
+            "Scenario": "Sea_Station_Rough",
+            "MappingPointBL": {
+                "Lat": 59.924707,
+                "Lon": 30.2376
+            }
+        }
+    },
+
+	"ActivePlugins": [ "SubModel", "Traffic", "SimpleInfection" ]
+}

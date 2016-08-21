@@ -1,0 +1,78 @@
+{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+  "GeoPointDL": {
+    "Lat": 59.94173,
+    "Lon": 30.27617
+  },
+  "MovementSystems": {
+    "Pedestrian": "sf"
+  },
+  "SimulationType": "Moving_Platform",
+  "ToSecondsMultiplier": 1,
+  "InitialPopulation": 0,
+  "TimeStart": "2014-09-16T17:20:00.000+04:00",  
+  "SimulationTime": "0-0-0T0:20:0.000",
+  "PreferredCoordinates": "cartesian",
+  "SF": {
+    "NeighborDist": 15,
+    "ObsHorizon": 5,
+    "Perception": 0.25,
+    "RelaxationTime": 1,
+    "AccelerationCoefficient": 0.5,
+    "TimeHorizon": 5,
+    "MaxNeighbors": 10,
+    "Radius": 0.2,
+    "RepulsiveAgent": 0.19,
+    "RepulsiveAgentFactor": 46,
+    "RepulsiveObstacle": 4,
+    "RepulsiveObstacleFactor": 0.32,
+    "Friction": 1,
+    "MaxSpeed": 2.0,
+	"PlatformFactor": 0.0000005
+  },
+  "GeoPointUR": {
+    "Lat": 59.945719,
+    "Lon": 30.287144
+  },
+  "ToMetersMultiplier": 1,
+  "ScenarioName": "Moving_Platform",
+  "DataSubDirectory": "Moving_Platform",
+  "MapPointUR": {
+    "Y": 400,
+    "X": 400
+  },
+  "Plugins": {
+    "MovingPlatformPlugin": { }
+  },
+
+  "ActivePlugins": [ "MovingPlatformPlugin" ],
+
+  "MapPointDL": {
+    "Y": 0,
+    "X": 0
+  },
+
+  "MovingPlatform": {
+    "SubScenery": "simple_square",
+
+    "SimType": "type_5",
+
+    "OffsetX": 10,
+    "OffsetY": 10,
+
+    "PitchT": 5,
+    "PutchA": 10,
+    "RollT": 4,
+    "RollA": 0,
+    "HeaveT": 4,
+    "HeaveH": 0,
+
+    "OutputDir": "C:\\work\\2015.08.04_VO_Validation_exp\\msf\\e1",
+    "OutFile": "e001",
+
+    "ExpTime": 30
+  },
+
+   "VisName":"Subway_Station  ^2Subway_Station",
+   "TimeStep":0.1
+}

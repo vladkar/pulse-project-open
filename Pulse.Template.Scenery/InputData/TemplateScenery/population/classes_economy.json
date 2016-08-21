@@ -1,0 +1,45 @@
+[
+	{
+		"id": 1,
+		"name" : "simple_class",
+		"home_buildings" : [
+            "null"
+        ],
+		"activities" : [
+            {
+                "type" : "primary", 
+				"name" : "null1",
+                "buildings" : [
+                    "null"
+                ]
+            },            
+            {
+                "type" : "secondary",
+				"name" : "null2",
+                "buildings" : [
+                    "null"
+                ]
+            }            
+        ],
+        "schedules" : [
+            {
+                "name" : "null",
+                "rating" : 100,
+                "weekdays" : [
+                    {
+                        "activity" : "null1",
+                        "per_day_percent" : 100,
+                        "time_start" : "9:10-9:30",
+                        "time_end" :  "13:00-14:00"
+                    },
+                    {
+                        "activity" : "null2",
+                        "per_day_percent" : 30,
+                        "time_start" : "15:00-15:30",
+                        "time_end" :  "20:00-20:30"
+                    }                    
+                ]
+            }
+        ]
+	}
+]

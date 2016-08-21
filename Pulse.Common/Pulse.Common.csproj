@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DE9E73C-806D-451B-998C-E04B5D18EE79}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pulse.Common</RootNamespace>
+    <AssemblyName>Pulse.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C5, Version=2.3.5280.26713, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\C5.2.3.0.1\lib\net40\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.1.0\lib\net40\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Behavior\BehaviorTreeFramework\Decorators\ParallelWorkerBtNodeDecorator.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Decorators\LooperBtDecorator.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Decorators\AbstracBtDecorator.cs" />
+    <Compile Include="Behavior\Intention\Current\CurrentIntention.cs" />
+    <Compile Include="Behavior\Intention\Current\ICurrentIntention.cs" />
+    <Compile Include="Behavior\Intention\Current\IMoveCurrentIntention.cs" />
+    <Compile Include="Behavior\Intention\Planned\PoiProbabilityPlannedIntention.cs" />
+    <Compile Include="Behavior\Intention\Planned\IPlannedIntention.cs" />
+    <Compile Include="Behavior\Intention\Current\IPoiCurrentIntention.cs" />
+    <Compile Include="Behavior\Intention\Planned\IPoiPlannedIntension.cs" />
+    <Compile Include="Behavior\Intention\Planned\IProbabilityPlannedIntension.cs" />
+    <Compile Include="Behavior\Intention\Current\PoiCurrentIntention.cs" />
+    <Compile Include="Behavior\Pulse\Bt\CalculatePathParallelExperimentalTask.cs" />
+    <Compile Include="Behavior\Pulse\Bt\CalculatePathTask.cs" />
+    <Compile Include="Behavior\Pulse\Bt\NavFieldGetDesiredPointTask.cs" />
+    <Compile Include="Behavior\Pulse\Bt\ProbabilityCondition.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Parents\SequenceBtNode.cs" />
+    <Compile Include="Behavior\Pulse\Bt\PathCalc.cs" />
+    <Compile Include="Behavior\Pulse\Bt\PathNodes.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Decorators\Sugar.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Leafs\AbstractActionBtNode.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Base\BehaviorState.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Base\AbstractBtLeaf.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Base\AbstractBtParent.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Leafs\AbstractConditionBtNode.cs" />
+    <Compile Include="Behavior\Pulse\Bt\PoiSelectTask.cs" />
+    <Compile Include="Behavior\Pulse\Bt\SimpleGetDesiredPointTask.cs" />
+    <Compile Include="Behavior\Pulse\DecisionTreeData.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Leafs\FuncBtNode.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Leafs\FuncConditionBtNode.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Parents\SelectorBtNode.cs" />
+    <Compile Include="Behavior\Pulse\TestData.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="DeltaStamp\DeltaManager.cs" />
+    <Compile Include="ISceneryFactory.cs" />
+    <Compile Include="Behavior\BehaviorTreeFramework\Base\AbstractBtNode.cs" />
+    <Compile Include="Behavior\Pulse\DecisionTreeRole.cs" />
+    <Compile Include="Model\Agent\SimpleIterationProbabilityAgentsGenerator.cs" />
+    <Compile Include="Model\Agent\SimpleIterationProbabilityAgentsGroupGenerator.cs" />
+    <Compile Include="Model\Agent\TriadAgent.cs" />
+    <Compile Include="Model\AgentScheduling\Abstract\AbstractAgentActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Abstract\AbstractPoiActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Current\ActivityState.cs" />
+    <Compile Include="Model\AgentScheduling\Current\Traveling\SimplePathTravelingActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Current\Traveling\SimplePortalActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Current\Traveling\UnitTravelingActivity.cs" />
+    <Compile Include="Model\Agent\AbstractAgentRole.cs" />
+    <Compile Include="Model\Environment\Poi\AbstractInteractivePointOfInterest.cs" />
+    <Compile Include="Engine\AbstractPulseFactory.cs" />
+    <Compile Include="Model\Integr\PulseWormHole.cs" />
+    <Compile Include="Model\Integr\WormHoleAgentsGenerator.cs" />
+    <Compile Include="NavField\NavfieldNavigator.cs" />
+    <Compile Include="NavField\nvf\FieldSpace.cs" />
+    <Compile Include="NavField\nvf\GridCell.cs" />
+    <Compile Include="NavField\nvf\INavfieldCalc.cs" />
+    <Compile Include="NavField\nvf\NavfieldCalc.cs" />
+    <Compile Include="NavField\nvf\NavigationFieldSpace.cs" />
+    <Compile Include="NavField\nvf\NavigationGridCell.cs" />
+    <Compile Include="Scenery\Loaders\PulseJsonReader.cs" />
+    <Compile Include="Scenery\Objects\AbstractPulseObject.cs" />
+    <Compile Include="Scenery\Objects\PulseObject.cs" />
+    <Compile Include="Scenery\Objects\Graph.cs" />
+    <Compile Include="Scenery\Objects\Level.cs" />
+    <Compile Include="Scenery\Objects\LocalPortal.cs" />
+    <Compile Include="Scenery\Objects\Obstacle.cs" />
+    <Compile Include="Scenery\Objects\PointOfInterest.cs" />
+    <Compile Include="Scenery\Objects\StaffPoint.cs" />
+    <Compile Include="Model\Agent\IPulseAgentGenerationModel.cs" />
+    <Compile Include="Model\AgentScheduling\Current\QueueActivity.cs" />
+    <Compile Include="Model\Agent\MovementSystem.cs" />
+    <Compile Include="Pseudo3D\AbstractExternalPortalAgentGenerator.cs" />
+    <Compile Include="Pseudo3D\Graph\RoadGraphPseudo3D.cs" />
+    <Compile Include="Pseudo3D\IComplexUpdatable.cs" />
+    <Compile Include="Pseudo3D\ISimpleUpdatable.cs" />
+    <Compile Include="Engine\PulseEngine.cs" />
+    <Compile Include="Model\Environment\World\PulseWorld.cs" />
+    <Compile Include="Model\Environment\Poi\QueueablePoi.cs" />
+    <Compile Include="Scenery\Loaders\SimpleGraphBuilder.cs" />
+    <Compile Include="Scenery\Loaders\SimpleLevelsBuilder.cs" />
+    <Compile Include="Scenery\Loaders\SimplePortalBuilder.cs" />
+    <Compile Include="DeltaStamp\Delta\Delta.cs" />
+    <Compile Include="Utils\KnnKdTree\DistanceFunctions.cs" />
+    <Compile Include="Utils\KnnKdTree\IntervalHeap.cs" />
+    <Compile Include="Utils\KnnKdTree\KDNode.cs" />
+    <Compile Include="Utils\KnnKdTree\KDTree.cs" />
+    <Compile Include="Utils\KnnKdTree\MinHeap.cs" />
+    <Compile Include="Utils\KnnKdTree\NearestNeighbour.cs" />
+    <Compile Include="Utils\ObjectCopier.cs" />
+    <Compile Include="Utils\Quad\RasterizedQuadTree.cs" />
+    <Compile Include="Model\Agent\SimpleScheduleRole.cs" />
+    <Compile Include="Scenery\Loaders\AbstractDataBroker.cs" />
+    <Compile Include="Scenery\Loaders\AbstractExternalPortalBuilder.cs" />
+    <Compile Include="Scenery\Loaders\AbstractFileDataReader.cs" />
+    <Compile Include="ConfigSystem\BaseConfigField.cs" />
+    <Compile Include="ConfigSystem\BaseScenarioConfig.cs" />
+    <Compile Include="ConfigSystem\PulseBaseScenarioConfig.cs" />
+    <Compile Include="ConfigSystem\PulseJsonScenarioConfig.cs" />
+    <Compile Include="ConfigSystem\PulsePluginScenarioConfig.cs" />
+    <Compile Include="ConfigSystem\PulseScenarioConfig.cs" />
+    <Compile Include="Model\AgentScheduling\IAbstractActivityFactory.cs" />
+    <Compile Include="Model\AgentScheduling\CurrentActivityFactory.cs" />
+    <Compile Include="Utils\GeoCartesUtil.cs" />
+    <Compile Include="Model\Environment\World\GeoCoords.cs" />
+    <Compile Include="Model\Environment\World\GeoMapConfig.cs" />
+    <Compile Include="Utils\GeomUtil.cs" />
+    <Compile Include="Model\Environment\Poi\ExternalPortal.cs" />
+    <Compile Include="Model\Agent\IInfectionData.cs" />
+    <Compile Include="Model\Legend\ILegendable.cs" />
+    <Compile Include="Model\Agent\IPopulationManager.cs" />
+    <Compile Include="Model\Legend\LegendAggregator.cs" />
+    <Compile Include="Model\Agent\IRole.cs" />
+    <Compile Include="Model\Environment\World\AbstractGeoWorld.cs" />
+    <Compile Include="Model\Agent\AbstractPulseAgent.cs" />
+    <Compile Include="Model\Environment\World\GeoClockContainer.cs" />
+    <Compile Include="Model\Environment\World\GeoWorldGeneralInfo.cs" />
+    <Compile Include="Model\Agent\AgentsFamily.cs" />
+    <Compile Include="Model\Agent\IAgentNavigator.cs" />
+    <Compile Include="Model\Environment\Poi\IPortal.cs" />
+    <Compile Include="Model\Environment\Poi\IInteractable.cs" />
+    <Compile Include="Model\Environment\Poi\PointOfInterestType.cs" />
+    <Compile Include="Model\Agent\IPulseAgentData.cs" />
+    <Compile Include="Model\IUniqueObject.cs" />
+    <Compile Include="Utils\Interval\MinuteInterval.cs" />
+    <Compile Include="Model\Environment\PulseScenery.cs" />
+    <Compile Include="Model\Environment\Map\IPulseMap.cs" />
+    <Compile Include="Model\Environment\World\IWorldKnowledge.cs" />
+    <Compile Include="Model\Agent\IBuilding.cs" />
+    <Compile Include="Utils\Interval\Interval.cs" />
+    <Compile Include="Model\Agent\ISocialEconomyClass.cs" />
+    <Compile Include="Model\Agent\IPhysicalCapabilityClass.cs" />
+    <Compile Include="Model\AgentScheduling\Abstract\AbstractClassSchedule.cs" />
+    <Compile Include="Model\AgentScheduling\Abstract\AbstractScheduleActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Planned\IAgentActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Planned\IPlannedGeoTimeActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Planned\IPlannedPoiActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Planned\PlannedActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Planned\PlannedDailyAgentSchedule.cs" />
+    <Compile Include="Model\AgentScheduling\Current\CurrentActivity.cs" />
+    <Compile Include="Model\Environment\Poi\IPointOfInterest.cs" />
+    <Compile Include="Model\AgentScheduling\Current\PassiveActionActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Current\Traveling\ComplexTravelingActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Current\SimpleActionActivity.cs" />
+    <Compile Include="Model\AgentScheduling\Current\WaitingActivity.cs" />
+    <Compile Include="Utils\Interval\TimeSpanInterval.cs" />
+    <Compile Include="Model\Environment\Map\Zone.cs" />
+    <Compile Include="Scenery\Loaders\OsmReader.cs" />
+    <Compile Include="PluginSystem\Spawn\AbstractPluginFactory.cs" />
+    <Compile Include="PluginSystem\Interface\IPluginable.cs" />
+    <Compile Include="PluginSystem\Interface\IUpdatablePlugin.cs" />
+    <Compile Include="PluginSystem\Interface\IUpdatablePluginMap.cs" />
+    <Compile Include="PluginSystem\Util\PluginableExtensions.cs" />
+    <Compile Include="PluginSystem\Base\PluginBase.cs" />
+    <Compile Include="PluginSystem\Base\PluginBaseAgent.cs" />
+    <Compile Include="PluginSystem\Base\PluginBaseAgentData.cs" />
+    <Compile Include="PluginSystem\Base\PluginBaseBuilding.cs" />
+    <Compile Include="PluginSystem\Base\PluginBaseMap.cs" />
+    <Compile Include="PluginSystem\Base\PluginBaseMapData.cs" />
+    <Compile Include="PluginSystem\Spawn\AbstractPulsePluginFactory.cs" />
+    <Compile Include="PluginSystem\Spawn\PluginsContainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pseudo3D\Graph\EdgeDataPseudo3D.cs" />
+    <Compile Include="Pseudo3D\Graph\VertexDataPseudo3D.cs" />
+    <Compile Include="Pseudo3D\IExternalPortal.cs" />
+    <Compile Include="Pseudo3D\ITravelPath.cs" />
+    <Compile Include="Pseudo3D\ILevelPortal.cs" />
+    <Compile Include="Pseudo3D\LevelPortalTransporter.cs" />
+    <Compile Include="Pseudo3D\PulseLevel.cs" />
+    <Compile Include="Pseudo3D\SimpleTravelPath.cs" />
+    <Compile Include="Model\Environment\World\PulseSimulationInfo.cs" />
+    <Compile Include="Model\Agent\SocialNetworks\SocialGraphQ.cs" />
+    <Compile Include="Model\Agent\SocialNetworks\SocialGraph.cs" />
+    <Compile Include="Utils\Algorithms\Astar\AstarCalc.cs" />
+    <Compile Include="Utils\Algorithms\Astar\AstarNodeData.cs" />
+    <Compile Include="Utils\Algorithms\Astar\AstarNodeDataComparer.cs" />
+    <Compile Include="Utils\Algorithms\IGraphCalc.cs" />
+    <Compile Include="Utils\FixedSizedQueue.cs" />
+    <Compile Include="Utils\EnumElement.cs" />
+    <Compile Include="Utils\Graph\Comparers.cs" />
+    <Compile Include="Utils\Graph\Graph.cs" />
+    <Compile Include="Utils\IdUtil.cs" />
+    <Compile Include="Utils\IntervalSizedQueue.cs" />
+    <Compile Include="Utils\RandomUtil.cs" />
+    <Compile Include="Utils\BezgodovKdTree\KdTree.cs" />
+    <Compile Include="Utils\Graph\Edge.cs" />
+    <Compile Include="Utils\EnumerableExtensions.cs" />
+    <Compile Include="Utils\Graph\Vertex.cs" />
+    <Compile Include="Utils\ClipperUtil.cs" />
+    <Compile Include="Utils\Quad\Quadrant.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Utils\Quad\AbstractQuadTree.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\Pulse.MultiagentEngine.csproj">
+      <Project>{db8c28f6-d975-4ccb-83cf-4f58765d0826}</Project>
+      <Name>Pulse.MultiagentEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

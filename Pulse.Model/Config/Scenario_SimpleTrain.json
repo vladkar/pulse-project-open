@@ -1,0 +1,59 @@
+﻿{
+  "GeoPointDL": {
+    "Lat": 59.962404978468741,
+    "Lon": 30.207206469971452
+  },
+  "MovementSystems": {
+    "Pedestrian": "simplevelocity"
+  },
+  "Scenery": "Train",
+  "ToSecondsMultiplier": 1,
+  "InitialPopulation": 0,
+  "TimeStart": "2016-06-23T16:50:00.000+03:00",
+  "SimulationTime": "0-0-0T0:20:0.000",
+  "PreferredCoordinates": "map",
+  "SF": {
+    "NeighborDist": 15,
+    "ObsHorizon": 5,
+    "Perception": 0.25,
+    "RelaxationTime": 1,
+    "AccelerationCoefficient": 0.5,
+    "TimeHorizon": 5,
+    "MaxNeighbors": 15,
+    "Radius": 0.1,
+    "RepulsiveAgent": 0.12,
+    "RepulsiveAgentFactor": 70,
+	  "RepulsiveObstacle": 0.1,
+    "RepulsiveObstacleFactor":0.3,
+    "Friction": 1,
+    "MaxSpeed": 2.0,
+	  "PlatformFactor": 0.0000005
+  },
+  "GeoPointUR": {
+    "Lat": 59.9997,
+    "Lon": 30.3630
+  },
+  "ToMetersMultiplier": 1,
+  "ScenarioName": "SimpleTrain",
+  "MapPointUR": {
+    "Y": 400,
+    "X": 400
+  },
+  
+  "Plugins": {		
+		"SimpleInfection": {
+			"InfectionName": "infection1",
+            "InfectionInitialization":  "train"
+		}
+	},
+
+	"ActivePlugins": ["SimpleInfection"],
+
+  "MapPointDL": {
+    "Y": 0,
+    "X": 0
+  },
+
+   "VisName":"routes\\ScheduleAdlerMinsk.rrt",
+   "TimeStep":0.1
+}

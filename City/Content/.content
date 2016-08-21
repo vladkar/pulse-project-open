@@ -1,0 +1,230 @@
+[Ignore]
+*.ma
+*.psd
+
+[BinaryDirectories]
+HKEY_CURRENT_USER\Software\FusionEngine@ToolsDir
+
+[ContentDirectories]
+HKEY_CURRENT_USER\Software\FusionEngine@ContentDir
+
+[Textures]
+*.tga
+*.png
+*.jpg
+
+[Fonts]
+*.bmfc
+[Shaders]
+
+*.hlsl
+
+[Scenes]
+*.fbx /geom /anim
+
+[Copy]
+dictionary.txt
+
+[Download]
+#Data\Krestovsky\population\classes_behavior.json	 = http://192.168.13.104/PulseData/Krestovsky/population/classes_behavior.json
+#Data\Krestovsky\population\classes_economy.json	 = http://192.168.13.104/PulseData/Krestovsky/population/classes_economy.json
+#Data\Krestovsky\population\en_classes_economy.json	 = http://192.168.13.104/PulseData/Krestovsky/population/en_classes_economy.json
+#Data\Krestovsky\population\en_society.csv	 = http://192.168.13.104/PulseData/Krestovsky/population/en_society.csv
+#Data\Krestovsky\population\society.csv	 = http://192.168.13.104/PulseData/Krestovsky/population/society.csv
+#Data\Krestovsky\scenery\fms_spb_objects.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/fms_spb_objects.json
+#Data\Krestovsky\scenery\map.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map.json
+#Data\Krestovsky\scenery\map_1.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_1.json
+#Data\Krestovsky\scenery\map_2.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_2.json
+#Data\Krestovsky\scenery\map_3.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_3.json
+#Data\Krestovsky\scenery\map_4.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_4.json
+#Data\Krestovsky\scenery\map_5.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_5.json
+#Data\Krestovsky\scenery\map_qtg.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_qtg.json
+#Data\Krestovsky\scenery\map_qtg4.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_qtg4.json
+#Data\Krestovsky\scenery\map_qtg_1.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_qtg_1.json
+#Data\Krestovsky\scenery\map_qtg_2.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_qtg_2.json
+#Data\Krestovsky\scenery\map_qtg_3.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/map_qtg_3.json
+#Data\Krestovsky\scenery\wm_spb_objects.json	 = http://192.168.13.104/PulseData/Krestovsky/scenery/wm_spb_objects.json
+#Data\Moving_Platform\population\classes_behavior.json	 = http://192.168.13.104/PulseData/Moving_Platform/population/classes_behavior.json
+#Data\Moving_Platform\population\classes_economy.json	 = http://192.168.13.104/PulseData/Moving_Platform/population/classes_economy.json
+#Data\Moving_Platform\population\society.csv	 = http://192.168.13.104/PulseData/Moving_Platform/population/society.csv
+#Data\Moving_Platform\scenery\map_evac.json	 = http://192.168.13.104/PulseData/Moving_Platform/scenery/map_evac.json
+#Data\Moving_Platform\scenery\map_evac_ship.json	 = http://192.168.13.104/PulseData/Moving_Platform/scenery/map_evac_ship.json
+#Data\Moving_Platform\scenery\map_qtg_evac.json	 = http://192.168.13.104/PulseData/Moving_Platform/scenery/map_qtg_evac.json
+#Data\Moving_Platform\scenery\map_qtg_evac_ship.json	 = http://192.168.13.104/PulseData/Moving_Platform/scenery/map_qtg_evac_ship.json
+#Data\Moving_Platform\scenery\map_qtg_square.json	 = http://192.168.13.104/PulseData/Moving_Platform/scenery/map_qtg_square.json
+#Data\Moving_Platform\scenery\map_square.json	 = http://192.168.13.104/PulseData/Moving_Platform/scenery/map_square.json
+#Data\SaintPetersburg\fms_spb_objects.json	 = http://192.168.13.104/PulseData/SaintPetersburg/fms_spb_objects.json
+#Data\SaintPetersburg\instagram_dataset.csv	 = http://192.168.13.104/PulseData/SaintPetersburg/instagram_dataset.csv
+#Data\SaintPetersburg\sentiment_dataset.csv	 = http://192.168.13.104/PulseData/SaintPetersburg/sentiment_dataset.csv
+#Data\SaintPetersburg\whore_dataset.csv	 = http://192.168.13.104/PulseData/SaintPetersburg/whore_dataset.csv
+#Data\SaintPetersburg\surv-cameras\crowd1.avi	 = http://192.168.13.104/PulseData/SaintPetersburg/surv-cameras/crowd1.avi
+#Data\SaintPetersburg\surv-cameras\crowd2.avi	 = http://192.168.13.104/PulseData/SaintPetersburg/surv-cameras/crowd2.avi
+#Data\SaintPetersburg\emergency_calls.csv	 = http://192.168.13.104/PulseData/SaintPetersburg/emergency_calls.csv
+#Data\SaintPetersburg\0-6_mundata.txt	 = http://192.168.13.104/PulseData/SaintPetersburg/0-6_mundata.txt
+#Data\SaintPetersburg\6-12_mundata.txt	 = http://192.168.13.104/PulseData/SaintPetersburg/6-12_mundata.txt
+#Data\SaintPetersburg\12-18_mundata.txt	 = http://192.168.13.104/PulseData/SaintPetersburg/12-18_mundata.txt
+#Data\SaintPetersburg\18-24_mundata.txt	 = http://192.168.13.104/PulseData/SaintPetersburg/18-24_mundata.txt
+#Data\SaintPetersburg\emc_density\0finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/0finalData.txt
+#Data\SaintPetersburg\emc_density\1finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/1finalData.txt
+#Data\SaintPetersburg\emc_density\2finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/2finalData.txt
+#Data\SaintPetersburg\emc_density\3finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/3finalData.txt
+#Data\SaintPetersburg\emc_density\4finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/4finalData.txt
+#Data\SaintPetersburg\emc_density\5finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/5finalData.txt
+#Data\SaintPetersburg\emc_density\6finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/6finalData.txt
+#Data\SaintPetersburg\emc_density\7finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/7finalData.txt
+#Data\SaintPetersburg\emc_density\8finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/8finalData.txt
+#Data\SaintPetersburg\emc_density\9finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/9finalData.txt
+#Data\SaintPetersburg\emc_density\10finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/10finalData.txt
+#Data\SaintPetersburg\emc_density\11finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/11finalData.txt
+#Data\SaintPetersburg\emc_density\12finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/12finalData.txt
+#Data\SaintPetersburg\emc_density\13finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/13finalData.txt
+#Data\SaintPetersburg\emc_density\14finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/14finalData.txt
+#Data\SaintPetersburg\emc_density\15finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/15finalData.txt
+#Data\SaintPetersburg\emc_density\16finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/16finalData.txt
+#Data\SaintPetersburg\emc_density\17finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/17finalData.txt
+#Data\SaintPetersburg\emc_density\18finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/18finalData.txt
+#Data\SaintPetersburg\emc_density\19finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/19finalData.txt
+#Data\SaintPetersburg\emc_density\20finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/20finalData.txt
+#Data\SaintPetersburg\emc_density\21finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/21finalData.txt
+#Data\SaintPetersburg\emc_density\22finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/22finalData.txt
+#Data\SaintPetersburg\emc_density\23finalData.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_density/23finalData.txt
+#Data\SaintPetersburg\emc_time_to_hospital\0.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/0.txt
+#Data\SaintPetersburg\emc_time_to_hospital\1.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/1.txt
+#Data\SaintPetersburg\emc_time_to_hospital\2.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/2.txt
+#Data\SaintPetersburg\emc_time_to_hospital\3.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/3.txt
+#Data\SaintPetersburg\emc_time_to_hospital\4.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/4.txt
+#Data\SaintPetersburg\emc_time_to_hospital\5.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/5.txt
+#Data\SaintPetersburg\emc_time_to_hospital\6.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/6.txt
+#Data\SaintPetersburg\emc_time_to_hospital\7.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/7.txt
+#Data\SaintPetersburg\emc_time_to_hospital\8.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/8.txt
+#Data\SaintPetersburg\emc_time_to_hospital\9.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/9.txt
+#Data\SaintPetersburg\emc_time_to_hospital\10.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/10.txt
+#Data\SaintPetersburg\emc_time_to_hospital\11.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/11.txt
+#Data\SaintPetersburg\emc_time_to_hospital\12.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/12.txt
+#Data\SaintPetersburg\emc_time_to_hospital\13.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/13.txt
+#Data\SaintPetersburg\emc_time_to_hospital\14.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/14.txt
+#Data\SaintPetersburg\emc_time_to_hospital\15.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/15.txt
+#Data\SaintPetersburg\emc_time_to_hospital\16.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/16.txt
+#Data\SaintPetersburg\emc_time_to_hospital\17.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/17.txt
+#Data\SaintPetersburg\emc_time_to_hospital\18.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/18.txt
+#Data\SaintPetersburg\emc_time_to_hospital\19.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/19.txt
+#Data\SaintPetersburg\emc_time_to_hospital\20.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/20.txt
+#Data\SaintPetersburg\emc_time_to_hospital\21.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/21.txt
+#Data\SaintPetersburg\emc_time_to_hospital\22.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/22.txt
+#Data\SaintPetersburg\emc_time_to_hospital\23.txt = http://192.168.13.104/PulseData/SaintPetersburg/emc_time_to_hospital/23.txt
+#Data\SaintPetersburg\subway_out_dataset.csv	= http://192.168.13.104/PulseData/SaintPetersburg/subway_out_dataset.csv
+#Data\SaintPetersburg\subway_in_dataset.csv	= http://192.168.13.104/PulseData/SaintPetersburg/subway_in_dataset.csv
+#Data\SaintPetersburg\subway_lines_coord.txt	= http://192.168.13.104/PulseData/SaintPetersburg/subway_lines_coord.txt
+#Data\StudentHospital\population\classes_behavior.json	 = http://192.168.13.104/PulseData/StudentHospital/population/classes_behavior.json
+#Data\StudentHospital\population\classes_economy.json	 = http://192.168.13.104/PulseData/StudentHospital/population/classes_economy.json
+#Data\StudentHospital\population\society.csv	 = http://192.168.13.104/PulseData/StudentHospital/population/society.csv
+#Data\StudentHospital\scenery\map.json	 = http://192.168.13.104/PulseData/StudentHospital/scenery/map.json
+#Data\StudentHospital\scenery\map_qtg.json	 = http://192.168.13.104/PulseData/StudentHospital/scenery/map_qtg.json
+#Data\StudentSportivnaya\population\classes_behavior.json	 = http://192.168.13.104/PulseData/StudentSportivnaya/population/classes_behavior.json
+#Data\StudentSportivnaya\population\classes_economy.json	 = http://192.168.13.104/PulseData/StudentSportivnaya/population/classes_economy.json
+#Data\StudentSportivnaya\population\society.csv	 = http://192.168.13.104/PulseData/StudentSportivnaya/population/society.csv
+#Data\StudentSportivnaya\scenery\map.json	 = http://192.168.13.104/PulseData/StudentSportivnaya/scenery/map.json
+#Data\StudentSportivnaya\scenery\map_qtg.json	 = http://192.168.13.104/PulseData/StudentSportivnaya/scenery/map_qtg.json
+#Data\StudentSportivnaya\scenery\map_qtg1.json	 = http://192.168.13.104/PulseData/StudentSportivnaya/scenery/map_qtg1.json
+#Data\StudentSportivnaya\scenery\map_qtg2.json	 = http://192.168.13.104/PulseData/StudentSportivnaya/scenery/map_qtg2.json
+#Data\StudentSubwayCar\population\classes_behavior.json	 = http://192.168.13.104/PulseData/StudentSubwayCar/population/classes_behavior.json
+#Data\StudentSubwayCar\population\classes_economy.json	 = http://192.168.13.104/PulseData/StudentSubwayCar/population/classes_economy.json
+#Data\StudentSubwayCar\population\society.csv	 = http://192.168.13.104/PulseData/StudentSubwayCar/population/society.csv
+#Data\StudentSubwayCar\scenery\map.json	 = http://192.168.13.104/PulseData/StudentSubwayCar/scenery/map.json
+#Data\StudentSubwayCar\scenery\map_qtg.json	 = http://192.168.13.104/PulseData/StudentSubwayCar/scenery/map_qtg.json
+#Data\SubwayStation\infection\cholerae\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/cholerae/infection.json
+#Data\SubwayStation\infection\cholerae\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/cholerae/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\cholerae\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/cholerae/infection_matrix.csv
+#Data\SubwayStation\infection\cholerae_counters\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/cholerae_counters/infection.json
+#Data\SubwayStation\infection\cholerae_counters\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/cholerae_counters/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\cholerae_counters\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/cholerae_counters/infection_matrix.csv
+#Data\SubwayStation\infection\ebolavirus\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/ebolavirus/infection.json
+#Data\SubwayStation\infection\ebolavirus\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/ebolavirus/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\ebolavirus\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/ebolavirus/infection_matrix.csv
+#Data\SubwayStation\infection\ebolavirus_counters\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/ebolavirus_counters/infection.json
+#Data\SubwayStation\infection\ebolavirus_counters\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/ebolavirus_counters/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\ebolavirus_counters\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/ebolavirus_counters/infection_matrix.csv
+#Data\SubwayStation\infection\grippus_avium\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/grippus_avium/infection.json
+#Data\SubwayStation\infection\grippus_avium\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/grippus_avium/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\grippus_avium\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/grippus_avium/infection_matrix.csv
+#Data\SubwayStation\infection\grippus_avium_counters\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/grippus_avium_counters/infection.json
+#Data\SubwayStation\infection\grippus_avium_counters\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/grippus_avium_counters/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\grippus_avium_counters\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/grippus_avium_counters/infection_matrix.csv
+#Data\SubwayStation\infection\mers\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/mers/infection.json
+#Data\SubwayStation\infection\mers\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/mers/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\mers\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/mers/infection_matrix.csv
+#Data\SubwayStation\infection\mers_counters\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/mers_counters/infection.json
+#Data\SubwayStation\infection\mers_counters\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/mers_counters/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\mers_counters\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/mers_counters/infection_matrix.csv
+#Data\SubwayStation\infection\variola\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/variola/infection.json
+#Data\SubwayStation\infection\variola\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/variola/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\variola\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/variola/infection_matrix.csv
+#Data\SubwayStation\infection\variola_counters\infection.json	 = http://192.168.13.104/PulseData/SubwayStation/infection/variola_counters/infection.json
+#Data\SubwayStation\infection\variola_counters\infection_bernulli_tail_constrains.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/variola_counters/infection_bernulli_tail_constrains.csv
+#Data\SubwayStation\infection\variola_counters\infection_matrix.csv	 = http://192.168.13.104/PulseData/SubwayStation/infection/variola_counters/infection_matrix.csv
+#Data\SubwayStation\population\classes_behavior.json	 = http://192.168.13.104/PulseData/SubwayStation/population/classes_behavior.json
+#Data\SubwayStation\population\classes_economy.json	 = http://192.168.13.104/PulseData/SubwayStation/population/classes_economy.json
+#Data\SubwayStation\population\society.csv	 = http://192.168.13.104/PulseData/SubwayStation/population/society.csv
+#Data\SubwayStation\scenery\map.json	 = http://192.168.13.104/PulseData/SubwayStation/scenery/map.json
+#Data\SubwayStation\scenery\map_qtg.json	 = http://192.168.13.104/PulseData/SubwayStation/scenery/map_qtg.json
+#Data\SubwayStation\scenery\map_qtg_.json	 = http://192.168.13.104/PulseData/SubwayStation/scenery/map_qtg_.json
+#Data\SubwayStation\scenery\map_qtg_high_res.json	 = http://192.168.13.104/PulseData/SubwayStation/scenery/map_qtg_high_res.json
+#Data\SubwayStation\scenery\map_qtg__.json	 = http://192.168.13.104/PulseData/SubwayStation/scenery/map_qtg__.json
+#Data\SubwayStation\scenery\map_qtg___.json	 = http://192.168.13.104/PulseData/SubwayStation/scenery/map_qtg___.json
+#Data\SubwayStation.Abstract\population\classes_behavior.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/population/classes_behavior.json
+#Data\SubwayStation.Abstract\population\classes_economy.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/population/classes_economy.json
+#Data\SubwayStation.Abstract\population\society.csv	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/population/society.csv
+#Data\SubwayStation.Abstract\scenery\map.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/scenery/map.json
+#Data\SubwayStation.Abstract\scenery\map1.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/scenery/map1.json
+#Data\SubwayStation.Abstract\scenery\map1_qtg.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/scenery/map1_qtg.json
+#Data\SubwayStation.Abstract\scenery\map2.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/scenery/map2.json
+#Data\SubwayStation.Abstract\scenery\map2_qtg.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/scenery/map2_qtg.json
+#Data\SubwayStation.Abstract\scenery\map3.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/scenery/map3.json
+#Data\SubwayStation.Abstract\scenery\map_qtg.json	 = http://192.168.13.104/PulseData/SubwayStation.Abstract/scenery/map_qtg.json
+#Data\Test28\config\Scenario_Simple_Test28.json	 = http://192.168.13.104/PulseData/Test28/config/Scenario_Simple_Test28.json
+#Data\Test28\population\classes_behavior.json	 = http://192.168.13.104/PulseData/Test28/population/classes_behavior.json
+#Data\Test28\population\classes_economy.json	 = http://192.168.13.104/PulseData/Test28/population/classes_economy.json
+#Data\Test28\population\society.csv	 = http://192.168.13.104/PulseData/Test28/population/society.csv
+#Data\Test28\scenery\map.json	 = http://192.168.13.104/PulseData/Test28/scenery/map.json
+#Data\Test28\scenery\map2.json	 = http://192.168.13.104/PulseData/Test28/scenery/map2.json
+#Data\Test28\scenery\map_qtg.json	 = http://192.168.13.104/PulseData/Test28/scenery/map_qtg.json
+#Data\Traffic\Data\alldayhospitals.txt	 = http://192.168.13.104/PulseData/Traffic/Data/alldayhospitals.txt
+#Data\Traffic\Data\ambulance_stations.txt	 = http://192.168.13.104/PulseData/Traffic/Data/ambulance_stations.txt
+#Data\Traffic\Data\ArchipelagMap.xml	 = http://192.168.13.104/PulseData/Traffic/Data/ArchipelagMap.xml
+#Data\Traffic\Data\Arxipellag_part_2.xml	 = http://192.168.13.104/PulseData/Traffic/Data/Arxipellag_part_2.xml
+#Data\Traffic\Data\density.csv	 = http://192.168.13.104/PulseData/Traffic/Data/density.csv
+#Data\Traffic\Data\dinamic_hospitals.txt	 = http://192.168.13.104/PulseData/Traffic/Data/dinamic_hospitals.txt
+#Data\Traffic\Data\final_spb_wtVO.xml	 = http://192.168.13.104/PulseData/Traffic/Data/final_spb_wtVO.xml
+#Data\Traffic\Data\hospitals.txt	 = http://192.168.13.104/PulseData/Traffic/Data/hospitals.txt
+#Data\Traffic\Data\hospitals_paths.xml	 = http://192.168.13.104/PulseData/Traffic/Data/hospitals_paths.xml
+#Data\Traffic\Data\hospitals_paths_2.xml	 = http://192.168.13.104/PulseData/Traffic/Data/hospitals_paths_2.xml
+#Data\Traffic\Data\KrestovskiyMap.xml	 = http://192.168.13.104/PulseData/Traffic/Data/KrestovskiyMap.xml
+#Data\Traffic\Data\MAPWITHZONES.2.XML	 = http://192.168.13.104/PulseData/Traffic/Data/MAPWITHZONES.2.XML
+#Data\Traffic\Data\nearest_nodes.txt	 = http://192.168.13.104/PulseData/Traffic/Data/nearest_nodes.txt
+#Data\Traffic\Data\new 1.txt	 = http://192.168.13.104/PulseData/Traffic/Data/new 1.txt
+#Data\Traffic\Data\new_map.xml	 = http://192.168.13.104/PulseData/Traffic/Data/new_map.xml
+#Data\Traffic\Data\new_map_2.xml	 = http://192.168.13.104/PulseData/Traffic/Data/new_map_2.xml
+#Data\Traffic\Data\new_map_3.xml	 = http://192.168.13.104/PulseData/Traffic/Data/new_map_3.xml
+#Data\Traffic\Data\new_map_4.xml	 = http://192.168.13.104/PulseData/Traffic/Data/new_map_4.xml
+#Data\Traffic\Data\null.defaults.sample.iconfig	 = http://192.168.13.104/PulseData/Traffic/Data/null.defaults.sample.iconfig
+#Data\Traffic\Data\null.neighbours.cfg.json	 = http://192.168.13.104/PulseData/Traffic/Data/null.neighbours.cfg.json
+#Data\Traffic\Data\null.sample.iconfig	 = http://192.168.13.104/PulseData/Traffic/Data/null.sample.iconfig
+#Data\Traffic\Data\null.simulation.config.json	 = http://192.168.13.104/PulseData/Traffic/Data/null.simulation.config.json
+#Data\Traffic\Data\osmGraph.bin	 = http://192.168.13.104/PulseData/Traffic/Data/osmGraph.bin
+#Data\Traffic\Data\vas.xml	 = http://192.168.13.104/PulseData/Traffic/Data/vas.xml
+#Data\Traffic\Data\VOhospitals.txt	 = http://192.168.13.104/PulseData/Traffic/Data/VOhospitals.txt
+#Data\Traffic\Data\zsd.100k.bson	 = http://192.168.13.104/PulseData/Traffic/Data/zsd.100k.bson
+#Data\Traffic\Data\zsd.12k.bson	 = http://192.168.13.104/PulseData/Traffic/Data/zsd.12k.bson
+#Data\Traffic\Data\zsd.xml	 = http://192.168.13.104/PulseData/Traffic/Data/zsd.xml
+#Data\Validation\population\classes_behavior.json	 = http://192.168.13.104/PulseData/Validation/population/classes_behavior.json
+#Data\Validation\population\classes_economy.json	 = http://192.168.13.104/PulseData/Validation/population/classes_economy.json
+#Data\Validation\population\society.csv	 = http://192.168.13.104/PulseData/Validation/population/society.csv
+#Data\Validation\scenery\map.json	 = http://192.168.13.104/PulseData/Validation/scenery/map.json
+  
+#Data\HarsiddhiTemple\population\classes_behavior.json =  http://192.168.13.104/PulseData/HarsiddhiTemple/population/classes_behavior.json
+#Data\HarsiddhiTemple\population\classes_economy.json =  http://192.168.13.104/PulseData/HarsiddhiTemple/population/classes_economy.json
+#Data\HarsiddhiTemple\population\society.csv =  http://192.168.13.104/PulseData/HarsiddhiTemple/population/society.csv
+#Data\HarsiddhiTemple\scenery\map.json =  http://192.168.13.104/PulseData/HarsiddhiTemple/scenery/map.json
+#Data\HarsiddhiTemple\scenery\map_qtg.json = http://192.168.13.104/PulseData/HarsiddhiTemple/scenery/map_qtg.json
+#Data\HarsiddhiTemple\vis\earth_ground_01.FBX =  http://192.168.13.104/PulseData/HarsiddhiTemple/vis/earth_ground_01.FBX
+#Data\HarsiddhiTemple\vis\object.FBX = http://192.168.13.104/PulseData/HarsiddhiTemple/vis/object.FBX

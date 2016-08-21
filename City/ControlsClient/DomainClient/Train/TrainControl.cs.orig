@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using City.Panel;
+using City.Snapshot;
+using City.Snapshot.PulseAgent;
+using City.Snapshot.Snapshot;
+using City.UIFrames.Converter;
+using City.UIFrames.Converter.Models;
+using Fusion.Core.Mathematics;
+using Fusion.Drivers.Graphics;
+using Fusion.Engine.Common;
+using Fusion.Engine.Frames;
+using Fusion.Engine.Graphics.GIS;
+using Fusion.Engine.Graphics.GIS.DataSystem.MapSources.Projections;
+using Fusion.Engine.Graphics.GIS.GlobeMath;
+using Fusion.Engine.Input;
+using Pulse.Common.Model.Agent;
+using Pulse.Common.Utils;
+using Pulse.Model.Environment;
+using Pulse.MultiagentEngine.Map;
+
+namespace City.ControlsClient.DomainClient.Train
+{
+	public class TrainControl : PulseMicroModelControl
+    {
+
+		public TrainRoute CurrentRoute { set; get; }
+		public Dictionary<string, TrainRoute> TrainRoutes { set; get; }
+
+		public DateTime CurrentTime;
+		TimeSpan TimeStep = TimeSpan.FromMinutes(1);
+
+		private TrainMapView	mapView;
+		private TrainModelView	modelView;
+		private TrainGraphics	graphicView;
+
+		protected override void InitializeControl()
+		{
+            modelView	= new TrainModelView(this);
+			mapView		= new TrainMapView(this);
+            graphicView = new TrainGraphics(this);
+            //var devView = new PulseMicroModelDeveloperView(this);
+
+            Views[1] = mapView;
+            //Views[1] = devView;
+            Views[2] = graphicView;
+            Views[3] = modelView;
+
+<<<<<<< HEAD
+	    protected override void LoadControl(ControlInfo controlInfo)
+	    {
+            
+	        //Route = TrainRoute.GenerateRouteForDebug(Game);
+	        var route1 = TrainRoute.LoadFromFiles(Game, "../../../Content/Data/Train/routes/ScheduleAdlerMoskow.rrt",
+                "../../../Content/Data/Train/routes/RouteAdlerMoscow.txt");
+	        var route2 = TrainRoute.LoadFromFiles(Game, "../../../Content/Data/Train/routes/ScheduleAdlerPerm.rrt",
+                "../../../Content/Data/Train/routes/RouteAdlerPerm.txt");
+	        var route3 = TrainRoute.LoadFromFiles(Game, "../../../Content/Data/Train/routes/ScheduleAdlerMinsk.rrt",
+                "../../../Content/Data/Train/routes/RouteAdlerMinsk.txt");
+=======
+
+			var route1 = TrainRoute.LoadFromFiles(Game, "TrainRoutes/ScheduleAdlerMoskow.rrt",
+				"TrainRoutes/RouteAdlerMoscow.txt");
+			var route2 = TrainRoute.LoadFromFiles(Game, "TrainRoutes/ScheduleAdlerPerm.rrt",
+				"TrainRoutes/RouteAdlerPerm.txt");
+			var route3 = TrainRoute.LoadFromFiles(Game, "TrainRoutes/ScheduleAdlerMinsk.rrt",
+				"TrainRoutes/RouteAdlerMinsk.txt");
+>>>>>>> origin/master
+
+			TrainRoutes = new Dictionary<string, TrainRoute>();
+
+			TrainRoutes.Add("TrainMoscow",	route1);
+			TrainRoutes.Add("TrainPerm",	route2);
+			TrainRoutes.Add("TrainMinsk",	route3);
+		}
+
+	    protected override void LoadControl(ControlInfo controlInfo)
+	    {
+			// Choose rout according to scenario
+		    if (TrainRoutes.ContainsKey(controlInfo.Scenario))
+					CurrentRoute = TrainRoutes[controlInfo.Scenario];
+			else	CurrentRoute = TrainRoutes.Values.First();
+
+	        CurrentTime = CurrentRoute.Schedule.StopsPlacesList[0].ArrivalTime;
+
+			var panel = mapView.Panel as GisPanel;
+			panel.PanelLayer.GisLayers.Add(CurrentRoute.LineLayer);
+			panel.PanelLayer.GisLayers.Add(CurrentRoute.PolyRouteLayer);
+
+			base.LoadControl(controlInfo);
+        }
+
+	    protected override void UpdateControl(GameTime gameTime)
+	    {
+	        CurrentTime += new TimeSpan((long) (TimeStep.Ticks*gameTime.ElapsedSec));
+	        if (Game.Keyboard.IsKeyDown(Keys.Q)) CurrentTime = CurrentRoute.Schedule.StopsPlacesList[0].ArrivalTime;
+
+            base.UpdateControl(gameTime);
+	    }
+
+
+		public override void UnloadControl()
+		{
+			var panel = mapView.Panel as GisPanel;
+			panel.PanelLayer.GisLayers.Remove(CurrentRoute.LineLayer);
+			panel.PanelLayer.GisLayers.Remove(CurrentRoute.PolyRouteLayer);
+		}
+
+
+
+
+		public Frame GetHoveredFrame(Frame root, Point position)
+		{
+			Frame hoverFrame = null;
+			UpdateHoverRecursive(root, position, ref hoverFrame);
+			return hoverFrame;
+		}
+
+
+		void UpdateHoverRecursive(Frame frame, Point p, ref Frame mouseHoverFrame)
+		{
+			if (frame == null) {
+				return;
+			}
+
+			if (frame.GlobalRectangle.Contains(p)) {
+				mouseHoverFrame = frame;
+				foreach (var child in frame.Children) {
+					UpdateHoverRecursive(child, p, ref mouseHoverFrame);
+				}
+			}
+		}
+
+
+	    private int i = 1;
+	    public Dictionary<int,List<Vector2>> getDataForGraphic()
+	    {
+	        var numberGraphics = 1;
+	        var points = new List<Vector2>()
+	        {
+	            new Vector2(i,  (float) (Math.Sin(i))),
+                new Vector2(i+1, (float)(Math.Sin(i+1))),
+                new Vector2(i+2, (float) Math.Sin(i+2)),
+            };
+	        i++;
+            return new Dictionary<int, List<Vector2>>()
+            {
+                {
+                    numberGraphics, points
+                }
+            };
+	    }
+    }
+}

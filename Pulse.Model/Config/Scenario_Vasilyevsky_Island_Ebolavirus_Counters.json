@@ -1,0 +1,44 @@
+{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+  "ScenarioName": "Vasilievsky Island, Saint-Petersburg Карантин: Школы",
+  "VisName": "СПб В/О   ^2Sudan Ebolavirus Карантин: Школы",
+  "DataSubDirectory": "VO",
+  "TimeStep": 3600,
+  "ToSecondsMultiplier": 1,
+  "TimeStart": "2014-10-7T07:00:00.000+04:00",
+  "InitialPopulation": 800,
+  "MapPointDL": {
+    "X": 0,
+    "Y": 0
+  },
+  "MapPointUR": {
+    "X": 10000,
+    "Y": 10000
+  },
+  "ToMetersMultiplier": 1,
+  "GeoPointDL": {
+    "Lat": 59.916127185943942,
+    "Lon": 30.155066037597368
+  },
+  "GeoPointUR": {
+    "Lat": 59.966725082678039,
+    "Lon": 30.324324155276081
+  },
+  "PreferredCoordinates": "geo",
+  "SimulationType": "Vasilyevsky",
+  "Plugins": {
+    "QuadTree": {
+      "GlobalQuadrantSize": 10000,
+      "QuadrantSizeMin": 5,
+      "QuadrantSizeMan": 200
+    },
+    "RoadGraph": {},
+    "SimpleInfection": {
+      "InfectionName": "ebolavirus_counters",
+      "InfectionInitialization": "children"
+    }
+  },
+  "ActivePlugins": [
+    "SimpleInfection"
+  ]
+}

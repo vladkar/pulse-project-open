@@ -1,0 +1,29 @@
+﻿{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+	"ScenarioName": "Subway_Station",
+    "VisName": "Subway_Station  ^2Subway_Station",
+	"DataSubDirectory": "SubwayStation",
+    "SimulationType":  "SubwayStation",
+	
+	"TimeStep": 0.1,
+	"ToSecondsMultiplier": 1,
+	"TimeStart": "2014-09-16T17:20:00.000+04:00",
+	
+	"InitialPopulation": 0,
+	
+	"MapPointDL": {"X": 0, "Y": 0},
+	"MapPointUR": {"X": 400, "Y": 400},
+	"ToMetersMultiplier": 1,
+	"GeoPointDL": {"Lat": 59.94173, "Lon": 30.27617},
+    "GeoPointUR": {"Lat": 59.945719, "Lon": 30.287144},
+    "PreferredCoordinates":  "cartesian",
+	
+	"MovementSystems": {
+        "Pedestrian" : "sf"
+		}, 
+
+	"Plugins": {
+	},
+
+	"ActivePlugins": [ ]
+}

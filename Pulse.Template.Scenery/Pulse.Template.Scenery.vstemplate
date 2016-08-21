@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Pulse.Template.Scenery</Name>
+    <Description>Pulse.Template.Scenery</Description>
+    <Icon>Pulse.Template.Scenery.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <MaxFrameworkVersion>4.0</MaxFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>dcadbf52-4094-4117-931e-f46de2961d5c</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>YourScenerySimpleName</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+
+  <TemplateContent>
+
+    <Project File="ProjectTemplate.csproj" TargetFileName="$pulsepre$$safeprojectname$.csproj" ReplaceParameters="true">
+
+      <!--<ProjectItem ReplaceParameters="true" TargetFileName="ProjectTemplate1.csproj">ProjectTemplate.csproj</ProjectItem>-->
+      <!--<ProjectItem ReplaceParameters="true" TargetFileName="ProjectTemplate2.csproj">$safeprojectname$.csproj</ProjectItem>-->
+
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$SceneryFactory.cs" OpenInEditor="true">TemplateSceneryFactory.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$SimpleAgentsGenerator.cs" OpenInEditor="true">TemplateSimpleAgentsGenerator.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$SimpleRole.cs" OpenInEditor="true">TemplateSimpleRole.cs</ProjectItem>
+      
+      
+    <Folder Name ="InputData">
+      <Folder Name="TemplateScenery" TargetFolderName="$safeprojectname$">
+        <Folder Name="config">
+          <ProjectItem ReplaceParameters="true" TargetFileName="Scenario_Simple_$safeprojectname$.json">Scenario_Template.json</ProjectItem>
+        </Folder>
+        <Folder Name="scenery">
+          <ProjectItem ReplaceParameters="true">map.json</ProjectItem>
+        </Folder>
+        <Folder Name="population">
+          <ProjectItem ReplaceParameters="true">classes_behavior.json</ProjectItem>
+          <ProjectItem ReplaceParameters="true">classes_economy.json</ProjectItem>
+          <ProjectItem ReplaceParameters="true">society.csv</ProjectItem>
+        </Folder>
+      </Folder>
+    </Folder>
+    
+    </Project>
+
+    <CustomParameters>
+      <CustomParameter Name="$pulsepre$" Value="Pulse.Scenery."/>
+    </CustomParameters>
+    
+  </TemplateContent>
+  
+</VSTemplate>

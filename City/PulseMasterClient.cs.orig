@@ -1,0 +1,176 @@
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using City.ControlsClient;
+using City.Snapshot;
+using Fusion.Core.Configuration;
+using Fusion.Core.Mathematics;
+using Fusion.Engine.Client;
+using Fusion.Engine.Common;
+using Fusion.Engine.Graphics;
+using Newtonsoft.Json;
+using Pulse.Common.ConfigSystem;
+using Pulse.Common.Engine;
+using Pulse.Model;
+using Pulse.Model.Environment;
+
+namespace City
+{
+    class PulseMasterClient : GameClient
+    {
+        [Config]
+        public CityConfig Config { get; set; } = new CityConfig();
+
+        private IDictionary<int, IPulseClient> _controls;
+        private ViewLayer _masterLayer;
+        private ServerInfo _serverConfig;
+
+
+        public PulseMasterClient(GameEngine gameEngine) : base(gameEngine)
+        {
+        }
+        
+        public override void Initialize()
+        {
+            _controls = new ConcurrentDictionary<int, IPulseClient>();
+            Config.DataDir = GetInpuDatatDir();
+        }
+        
+        public override void LoadLevel(string serverInfo)
+        {
+            if (string.IsNullOrEmpty(serverInfo)) return;
+
+            _serverConfig = JsonConvert.DeserializeObject<ServerInfo>(serverInfo);
+
+            ConfigureLevel(_serverConfig);
+
+            _masterLayer = (GameEngine.GameInterface as CustomGameInterface).MasterView;
+
+            foreach (var control in _controls.Values)
+                control.Initialize(GameEngine, _masterLayer);
+
+            foreach (var control in _controls)
+                control.Value.LoadLevel(_serverConfig.Controls[control.Key]);
+        }
+
+        private void ConfigureLevel(ServerInfo si)
+        {
+            foreach (var control in si.Controls.Values)
+            {
+<<<<<<< HEAD
+                _controls[control.Id] = ControlFactory.GetClientControl(control.Name);
+=======
+                case "simple_test28":
+                case "krestovsky":
+                case "novokrest":
+                    _controls[1] = new PulseClient(scenario);
+                    break;
+
+                case "instagram":
+                    _controls[2] = new InstagramClient();
+                    break;
+
+                case "sentiment":
+                    _controls[3] = new SentimentClient();
+                    break;
+
+                case "survcam":
+                    _controls[4] = new SurveillanceCameraClient();
+                    break;
+                case "simpletraffic":
+                    _controls[5] = new TrafficClient(scenario);
+                    break;
+
+                default:
+                    throw new Exception($"Client for map {scenario} not found");
+>>>>>>> origin/emc_modelling
+            }
+        }
+
+        public override void UnloadLevel()
+        {
+            foreach (var control in _controls.Values)
+                control.UnloadLevel();
+        }
+
+        public override byte[] Update(GameTime gameTime)
+        {
+			using (var commandStream = new MemoryStream())
+			{
+			    foreach (var control in _controls.Values)
+			    {
+			        var command = control.Update(gameTime);
+                    commandStream.Write(command, 0, command.Length);
+                }
+
+				return commandStream.GetBuffer();
+			}
+        }
+        
+        public override void FeedSnapshot(byte[] snapshot)
+        {
+            var pbs = new PulseBinarySerializer(_serverConfig);
+            var currentSnapshot = pbs.GetCompleleSnaphot(snapshot);
+            
+            foreach (var control in _controls)
+            {
+                control.Value.FeedSnapshot(currentSnapshot[control.Key]);
+            }
+        }
+
+        public override string UserInfo()
+        {
+            //throw new NotImplementedException();
+            return "test";
+        }
+
+
+        private string GetInpuDatatDir()
+        {
+            #region  Deployed Assembly
+
+            var assemblFile = Assembly.GetExecutingAssembly().Location;
+            var assenblDir = Path.GetDirectoryName(assemblFile);
+
+            var dataAssemblyDirLocation = assenblDir + Path.DirectorySeparatorChar + "InputData" + Path.DirectorySeparatorChar;
+            var isDataInAssemblyDir = Directory.Exists(dataAssemblyDirLocation);
+
+            if (isDataInAssemblyDir)
+                return dataAssemblyDirLocation;
+
+            #endregion
+
+            #region Visual Studio Assembly
+
+            var solutionDir = Directory.GetParent(assenblDir).Parent.Parent.Parent.FullName;
+            var dataInVisualStudioLocation = solutionDir + Path.DirectorySeparatorChar + "Pulse.Model" +
+                                             Path.DirectorySeparatorChar + "InputData" + Path.DirectorySeparatorChar;
+            var isDataInVisualStudioDir = Directory.Exists(dataInVisualStudioLocation);
+
+            if (isDataInVisualStudioDir)
+                return dataInVisualStudioLocation;
+
+            #endregion
+
+            throw new Exception("Input Data directory not found");
+        }
+    }
+
+
+    public class CityConfig
+    {
+        public string DataDir { get; set; }
+
+        public CityConfig()
+        {
+            DataDir = "UNDEFINED";
+        }
+    }
+}

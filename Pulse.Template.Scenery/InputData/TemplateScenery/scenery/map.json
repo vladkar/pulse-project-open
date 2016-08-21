@@ -1,0 +1,112 @@
+{
+   "id":1,
+   "name":"Test",
+   "description":"Test Scenario",
+   "version": "0.1",
+   "levels":[
+      {
+         "id":2,
+         "level":1,
+        "poi": [
+          {
+            "id": 3,
+            "type": "exmaple_poi",
+            "polygon": [
+              {
+                "x": 45,
+                "y": 5
+              },
+              {
+                "x": 55,
+                "y": 5
+              },
+              {
+                "x": 55,
+                "y": 15
+              },
+              {
+                "x": 45,
+                "y": 15
+              }
+            ]
+          }
+        ],
+        "obstacles":[
+            {
+               "id":4,
+               "type":"wall",
+               "polygon":[
+                  {
+                     "x":0,
+                     "y":0
+                  },
+                  {
+                     "x":100,
+                     "y":0
+                  },
+                  {
+                     "x":100,
+                     "y":20
+                  },
+                  {
+                     "x":0,
+                     "y":20
+                  }
+               ]
+            }
+         ],
+         "portals":[
+            {
+               "id":5,
+               "type":"door",
+               "link":"example_generator",
+               "enter":false,
+               "exit":true,
+               "polygon":[
+                  {
+                     "x":5,
+                     "y":5
+                  },
+                  {
+                     "x":15,
+                     "y":5
+                  },
+                  {
+                     "x":15,
+                     "y":15
+                  },
+                  {
+                     "x":5,
+                     "y":15
+                  }
+               ]
+            },
+            {
+               "id":6,
+               "type":"door",
+               "link":"example_killer",
+               "enter":true,
+               "exit":false,
+               "polygon":[
+                  {
+                     "x":85,
+                     "y":5
+                  },
+                  {
+                     "x":95,
+                     "y":5
+                  },
+                  {
+                     "x":95,
+                     "y":15
+                  },
+                  {
+                     "x":85,
+                     "y":15
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

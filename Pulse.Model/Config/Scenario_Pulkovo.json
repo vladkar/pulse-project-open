@@ -1,0 +1,43 @@
+﻿{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+	"ScenarioName": "Pulkovo airport, Saint-Petersburg",
+    "VisName": "Терминал   ^2Аэропорт Пулково",
+	
+	"TimeStep": 1,
+	"ToSecondsMultiplier": 1,
+	"TimeStart": "2014-09-16T07:00:00.000+04:00",
+	
+	"InitialPopulation": 0,
+	
+	"MapPointDL": {"X": 0, "Y": 0},
+	"MapPointUR": {"X": 400, "Y": 400},
+	"ToMetersMultiplier": 1,
+	"GeoPointDL": {"Lat": 59.933436, "Lon": 30.234280},
+    "GeoPointUR": {"Lat": 59.945719, "Lon": 30.287144},
+    "PreferredCoordinates":  "cartesian",
+
+    "Scenery": "Pulkovo",
+
+    "MovementSystems": {
+        "Pedestrian" : "simplevelocity"
+		}, 
+
+	"Plugins": {
+		"QuadTree": {
+			"GlobalQuadrantSize": 400,
+			"QuadrantSizeMin": 0.5,
+			"QuadrantSizeMan": 4
+		},
+		
+		"RoadGraph": {		
+		},
+              
+		
+		"SimpleInfection": {
+			"InfectionName": "anthrax",
+            "InfectionInitialization":  "toilets"
+		}
+	},
+
+	"ActivePlugins": [ ]
+}

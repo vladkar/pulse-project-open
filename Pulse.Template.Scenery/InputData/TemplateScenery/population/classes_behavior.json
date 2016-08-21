@@ -1,0 +1,22 @@
+[	
+    {
+		"id" : 1,
+		"name" : "adult",
+		"agility" : "2/3",
+		"stamina" : "2",
+		"strength" : "1/2/3",
+		"control" : "1/2",
+		"information" : "2",
+		"role" : "1/2",
+		"passability" : "2/3",
+		"marital" : "1/2/3",
+		"speed": 
+		{
+			"walk": "3",
+			"run": "8",
+			"mod_rise_laden": "",
+			"mod_desc": ""
+		}
+	}
+]
+

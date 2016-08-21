@@ -1,0 +1,30 @@
+﻿{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+	"ScenarioName": "Train of Death",
+    "VisName": "Поезд   ^2Variola",
+	"DataSubDirectory": "Train",
+	
+	"TimeStep": 1,
+	"ToSecondsMultiplier": 1,
+	"TimeStart": "2014-09-16T03:50:00.000+04:00",
+	
+	"InitialPopulation": 0,
+	
+	"MapPointDL": {"X": 0, "Y": 0},
+	"MapPointUR": {"X": 400, "Y": 400},
+	"ToMetersMultiplier": 0.01,
+	"GeoPointDL": {"Lat": 59.933436, "Lon": 28.034280},
+    "GeoPointUR": {"Lat": 59.945719, "Lon": 30.287144},
+    "PreferredCoordinates":  "cartesian",
+	
+    "SimulationType":  "Train",
+
+	"Plugins": {		
+		"SimpleInfection": {
+			"InfectionName": "variola",
+            "InfectionInitialization":  "train"
+		}
+	},
+
+	"ActivePlugins": ["SimpleInfection"]
+}

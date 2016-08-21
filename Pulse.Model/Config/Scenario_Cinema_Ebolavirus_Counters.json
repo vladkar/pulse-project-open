@@ -1,0 +1,38 @@
+{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+  "ScenarioName": "Cinema Карантин: Школы",
+  "VisName": "Кинотеатр   ^2Sudan Ebolavirus Карантин: Школы",
+  "DataSubDirectory": "Cinema",
+  "SimulationType": "Cinema",
+  "TimeStep": 1,
+  "ToSecondsMultiplier": 1,
+  "TimeStart": "2014-09-16T17:20:00+04:00",
+  "InitialPopulation": 0,
+  "MapPointDL": {
+    "X": 0,
+    "Y": 0
+  },
+  "MapPointUR": {
+    "X": 400,
+    "Y": 400
+  },
+  "ToMetersMultiplier": 1,
+  "GeoPointDL": {
+    "Lat": 59.933436,
+    "Lon": 30.23428
+  },
+  "GeoPointUR": {
+    "Lat": 59.945719,
+    "Lon": 30.287144
+  },
+  "PreferredCoordinates": "cartesian",
+  "Plugins": {
+    "SimpleInfection": {
+      "InfectionName": "ebolavirus_counters",
+      "InfectionInitialization": "cinema"
+    }
+  },
+  "ActivePlugins": [
+    "SimpleInfection"
+  ]
+}

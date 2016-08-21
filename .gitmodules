@@ -1,0 +1,8 @@
+[submodule "Pulse.SocialForce"]
+	path = Pulse.SocialForce
+	url = https://github.com/itmo-escience/social-phys-lib-private
+	branch = sum
+[submodule "Pulse.Rvo"]
+	path = Pulse.Rvo
+	url = https://github.com/itmo-escience/rvo-lib.git
+	branch = master

@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{34659522-51BF-4F52-96A4-5DBEE2B61121}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pulse.Model</RootNamespace>
+    <AssemblyName>Pulse.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_86|x86'">
+    <OutputPath>bin\x86\Release_86\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_86|AnyCPU'">
+    <OutputPath>bin\Release_86\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_86|x64'">
+    <OutputPath>bin\x64\Release_86\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C5, Version=2.3.5280.26713, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\C5.2.3.0.1\lib\net40\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="RVO2DWrapperNoXna, Version=1.0.5563.24775, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\RVO\x86\RVO2DWrapperNoXna.dll</HintPath>
+    </Reference>
+    <Reference Include="SFWrapperNoXna, Version=1.0.5697.29050, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\SF_moving_platform\SFWrapperNoXna.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityHighLevel.cs" />
+    <Compile Include="AgentNetworkManager.cs" />
+    <Compile Include="Agents\Buff.cs" />
+    <Compile Include="Agents\IPulseAgentFactory.cs" />
+    <Compile Include="Agents\PopulationManager.cs" />
+    <Compile Include="Agents\PulseAgent.cs" />
+    <Compile Include="Agents\PulseAgentFactory.cs" />
+    <Compile Include="Config\JsonPulseScenarioConfig.cs" />
+    <Compile Include="RoadGraphNavigatorPseudo3D.cs" />
+    <Compile Include="IAbstractActivityFactory.cs" />
+    <Compile Include="SfMultilevelMovementSystem.cs" />
+    <Compile Include="SfMovementSystem.cs" />
+    <Compile Include="RvoMovementSystem.cs" />
+    <Compile Include="SimpleVelocityMovementSystem.cs" />
+    <Compile Include="SimpleMovementSystem.cs" />
+    <Compile Include="MovementSystemFactory.cs" />
+    <Compile Include="NavigationModule.cs" />
+    <Compile Include="PluginFactory.cs" />
+    <Compile Include="Agents\PulseNotifyAgentFactory.cs" />
+    <Compile Include="Agents\VsAgentNotify.cs" />
+    <Compile Include="Agents\PulseAgentsData.cs" />
+    <Compile Include="Environment\PulseMapData.cs" />
+    <Compile Include="ModelFactory.cs" />
+    <Compile Include="Agents\SimpleAgentsGenerator.cs" />
+    <Compile Include="Environment\PulseMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VirSocStates.cs" />
+    <Compile Include="PulseInstance.cs" />
+    <Compile Include="Agents\WorldKnowledge.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\MultiagentEngine.Pulse.csproj">
+      <Project>{2832536F-AAB0-4507-9DFC-788080747A71}</Project>
+      <Name>MultiagentEngine.Pulse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Plugin.Evacuation\Pulse.Plugin.Evacuation.csproj">
+      <Project>{A7F57425-6250-41F7-8372-FFB47F1AD79C}</Project>
+      <Name>Pulse.Plugin.Evacuation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Plugin.SubModel\Pulse.Plugin.SubModel.csproj">
+      <Project>{846065B8-6C5A-480F-AEDC-985C40531899}</Project>
+      <Name>Pulse.Plugin.SubModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Plugin.Traffic\Pulse.Plugin.Traffic.csproj">
+      <Project>{1A30AB82-D23F-4C8F-9CE6-EEDB10D190EB}</Project>
+      <Name>Pulse.Plugin.Traffic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Cinema\Pulse.Scenery.Cinema.csproj">
+      <Project>{DB0F1C91-A012-4CBC-8645-DDA4CAA8AD52}</Project>
+      <Name>Pulse.Scenery.Cinema</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Corridor\Pulse.Scenery.Corridor.csproj">
+      <Project>{6a6c63d2-dccf-43fc-b58e-7544776e20fc}</Project>
+      <Name>Pulse.Scenery.Corridor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Corridor_T\Pulse.Scenery.Corridor_T.csproj">
+      <Project>{201b3aca-51f2-4eac-8f4a-46ecc537554f}</Project>
+      <Name>Pulse.Scenery.Corridor_T</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Krestovsky\Pulse.Scenery.Krestovsky.csproj">
+      <Project>{600F02FE-EE34-4DD5-8616-3B3030E76EE9}</Project>
+      <Name>Pulse.Scenery.Krestovsky</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Luchegorsk\Pulse.Scenery.Luchegorsk.csproj">
+      <Project>{3490B42F-80AB-4E10-8540-F2E501E995CE}</Project>
+      <Name>Pulse.Scenery.Luchegorsk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.MovingPlatform\Pulse.Scenery.MovingPlatform.csproj">
+      <Project>{F6FF1C72-E54D-4D9C-A31B-13D45E62F587}</Project>
+      <Name>Pulse.Scenery.MovingPlatform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Ship\Pulse.Scenery.Ship.csproj">
+      <Project>{3364CE88-1AE8-48BE-8EAF-BA602F575733}</Project>
+      <Name>Pulse.Scenery.Ship</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.SeaStationRough\Pulse.Scenery.SeaStationRough.csproj">
+      <Project>{4D6BE379-1B15-4038-9AE0-4F5546B3E190}</Project>
+      <Name>Pulse.Scenery.SeaStationRough</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.StPetersburg.Net\Pulse.Scenery.StPetersburg.Net.csproj">
+      <Project>{3AD8BA8D-6ED9-43D5-8183-F313380542E5}</Project>
+      <Name>Pulse.Scenery.StPetersburg.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.SubwayStation.Vasileostrovskaya\Pulse.Scenery.SubwayStation.Vasileostrovskaya.csproj">
+      <Project>{01DE4491-DFB9-41DB-ADDA-F9CA028E0829}</Project>
+      <Name>Pulse.Scenery.SubwayStation.Vasileostrovskaya</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Train\Pulse.Scenery.Train.csproj">
+      <Project>{1F6A0930-60AD-4C7C-92B7-038D02F53FDE}</Project>
+      <Name>Pulse.Scenery.Train</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Vasilyevsky\Pulse.Scenery.Vasilyevsky.csproj">
+      <Project>{8ADDE814-F992-4D32-88BB-C0C2A8AF8E54}</Project>
+      <Name>Pulse.Scenery.Vasilyevsky</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Scenery.Pulkovo\Pulse.Scenery.Pulkovo.csproj">
+      <Project>{9af69da9-ca10-4109-97de-c564aa4a7811}</Project>
+      <Name>Pulse.Scenery.Pulkovo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Plugin.SimpleInfection\Pulse.Plugin.SimpleInfection.csproj">
+      <Project>{8f42bf51-f664-4725-acb5-1a4193cbb40c}</Project>
+      <Name>Pulse.Plugin.SimpleInfection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Common\Pulse.Common.csproj">
+      <Project>{6DE9E73C-806D-451B-998C-E04B5D18EE79}</Project>
+      <Name>Pulse.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Social\Pulse.Social.csproj">
+      <Project>{8F918606-7F13-4C17-87ED-EDDBECEAB1C8}</Project>
+      <Name>Pulse.Social</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocialForce\SocialForce.csproj">
+      <Project>{334C22DF-935F-44F9-8E37-06AC344453AC}</Project>
+      <Name>SocialForce</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="InputData\Bereg\buildings\aggr_data.xml" />
+    <Content Include="InputData\Bereg\buildings\daniil\aggr_data_0.xml" />
+    <Content Include="InputData\Bereg\buildings\daniil\aggr_data_1.xml" />
+    <Content Include="InputData\Bereg\buildings\daniil\aggr_data_2.xml" />
+    <Content Include="InputData\Bereg\buildings\daniil\aggr_data_3.xml" />
+    <Content Include="InputData\Bereg\buildings\daniil\aggr_data_exp2.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_1\0.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_1\1.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_1\2.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_1\3.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_1\aggr_data.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_2\0.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_2\1.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_2\2.xml" />
+    <Content Include="InputData\Bereg\buildings\victor_2\3.xml" />
+    <Content Include="InputData\Bereg\population\backup\work_comments.txt" />
+    <Content Include="InputData\Bereg\population\work_comments.txt" />
+    <Content Include="InputData\Krymsk\buildings\fms_data.xml" />
+    <Content Include="InputData\Krymsk\buildings\wm_data.xml" />
+    <Content Include="InputData\Pulkovo\external_flows\portals.xml" />
+    <Content Include="Config\Scenario_Vasilyevsky_Island_Daily.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="InputData\VO\scenery\aggregated_buildings.xml" />
+    <Content Include="InputData\VO\scenery\portals.xml" />
+    <None Include="app.config" />
+<<<<<<< HEAD
+    <None Include="Config\Scenario_Krestovsky.json">
+=======
+    <None Include="Config\Scenario_Moving_Platform_Evac_Ship.json">
+>>>>>>> origin/second_experiment
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Moving_Platform_Evac.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Corridor_T.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Corridor.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Ship_Evac.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_Ebolavirus.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Moving_Platform.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Subway_Station_Validation.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Subway_Station_Demo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Subway_Station.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Sea_Station_Rough.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_Evac_Infection.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_Evac.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_Grippus_Avium.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_MERS.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_MERS_CoV.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_Variola.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Cinema_Vibrio_Сholerae.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Luchegorsk_Ebolavirus.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Luchegorsk_Grippus_Avium.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Luchegorsk_MERS.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Luchegorsk_Variola.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Luchegorsk_Vibrio_Сholerae.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Pulkovo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Pulkovo_Bacillus_Anthracis.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Pulkovo_Ebolavirus.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Pulkovo_Grippus_Avium.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Pulkovo_MERS.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Pulkovo_Variola.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Pulkovo_Vibrio_Сholerae.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Train_Variola.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Config\Scenario_Vasilyevsky_Island_Traffic.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Scenario_St_Petersburg_Net_Test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Config\Scenario_Vasilyevsky_Island_Ebolavirus.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Vasilyevsky_Island_Grippus_Avium.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Vasilyevsky_Island_MERS.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Config\Scenario_Vasilyevsky_Island_SubModel_Test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Scenario_Vasilyevsky_Island_Sea_Station.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Scenario_Vasilyevsky_Island_Subway_Station.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Scenario_Vasilyevsky_Island_Subway_Station_Demo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Scenario_Vasilyevsky_Island_Experiment_1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Config\Scenario_Vasilyevsky_Island_Variola.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Scenario_Vasilyevsky_Island_Vibrio_Сholerae.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="InputData\Bereg\environment\borders.json" />
+    <None Include="InputData\Bereg\flood\izid1.asc" />
+    <None Include="InputData\Bereg\flood\output.csv" />
+    <None Include="InputData\Bereg\population\backup\classes_behavior.json" />
+    <None Include="InputData\Bereg\population\backup\classes_economy.json" />
+    <None Include="InputData\Bereg\population\backup\society.csv" />
+    <None Include="InputData\Bereg\population\classes_behavior.json" />
+    <None Include="InputData\Bereg\population\classes_economy.json" />
+    <None Include="InputData\Bereg\population\society.csv" />
+    <None Include="InputData\Krymsk\additions\flood\izid1.asc" />
+    <None Include="InputData\Krymsk\additions\flood\output.csv" />
+    <None Include="InputData\Krymsk\environment\borders.json" />
+    <None Include="InputData\Krymsk\population\classes_behavior.json" />
+    <None Include="InputData\Krymsk\population\classes_economy.json" />
+    <None Include="InputData\Krymsk\population\society.json" />
+    <None Include="InputData\Pulkovo\infection\ebola\infection.json" />
+    <None Include="InputData\Pulkovo\infection\ebola\infection_bernulli_tail_constrains.csv" />
+    <None Include="InputData\Pulkovo\infection\ebola\infection_matrix.csv" />
+    <None Include="InputData\Pulkovo\scenery\map.json" />
+    <None Include="InputData\Pulkovo\population\classes_behavior.json" />
+    <None Include="InputData\Pulkovo\population\classes_economy.json" />
+    <None Include="InputData\Pulkovo\population\society.csv" />
+    <None Include="InputData\VO\infection\ebola\infection.json" />
+    <None Include="InputData\VO\infection\ebola\infection_bernulli_tail_constrains.csv" />
+    <None Include="InputData\VO\infection\ebola\infection_matrix.csv" />
+    <None Include="InputData\VO\population\classes_behavior.json" />
+    <None Include="InputData\VO\population\classes_economy.json" />
+    <None Include="InputData\VO\population\society.csv" />
+    <None Include="InputData\VO\scenery\flows.dat" />
+    <None Include="InputData\VO\scenery\road_graph.osm" />
+    <None Include="NLog.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="InputData\Bereg\population\daniil\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,177 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using Fusion;
+using City.UIFrames;
+using City.UIFrames.Converter;
+using City.UIFrames.Converter.Models;
+using Fusion.Build;
+using Fusion.Core.Mathematics;
+using Fusion.Drivers.Graphics;
+using Fusion.Engine.Common;
+using Fusion.Engine.Input;
+using Fusion.Engine.Graphics;
+using Fusion.Core;
+using Fusion.Core.Configuration;
+using Fusion.Framework;
+using Fusion.Engine.UserInterface;
+
+namespace City
+{
+    class CustomGameInterface : Fusion.Engine.Common.GameInterface
+    {
+
+        [GameModule("Console", "con", InitOrder.Before)]
+        public GameConsole Console { get { return console; } }
+        public GameConsole console;
+
+        [GameModule("GUI", "gui", InitOrder.Before)]
+        public UserInterface UserInterface { get { return ui; } }
+        public UserInterface ui;
+
+        SpriteLayer testLayer;
+        DiscTexture texture;
+        public ViewLayer MasterView { get; protected set; }
+
+        float angle = 0;
+        SpriteLayer uiLayer;
+
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param Name="engine"></param>
+        public CustomGameInterface(GameEngine gameEngine) : base(gameEngine)
+        {
+            console = new GameConsole(gameEngine, "conchars", "conback");
+            ui = new UserInterface(GameEngine, "segoe40");
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Initialize()
+        {
+<<<<<<< HEAD
+            MasterView = new ViewLayer(GameEngine);//, 1024, 768);
+=======
+            FrameHelper.LoadDictionary(ui.GameEngine.Content);
+            FrameHelper.setDictionary(ConstantFrameUI.DefaultDictionary);
+
+            MasterView = new ViewLayer(GameEngine, 0, 0, false);
+>>>>>>> origin/CityVisUI
+            MasterView.SpriteLayers.Add(console.ConsoleSpriteLayer);
+
+            GameEngine.GraphicsEngine.AddLayer(MasterView); 
+            uiLayer = new SpriteLayer(GameEngine.GraphicsEngine, 1024);
+
+            // Created main frame
+            var mainPanel = new MainFrameUI(ui, uiLayer);
+            GameEngine.GraphicsEngine.DisplayBoundsChanged += (sender, args) =>
+            {
+                mainPanel.resizePanel();
+            };
+            ui.RootFrame = mainPanel;
+
+
+
+            
+
+            ui.SettleControls();
+
+<<<<<<< HEAD
+            //MasterView.SpriteLayers.Add(uiLayer);
+=======
+            MasterView.SpriteLayers.Add(uiLayer);
+>>>>>>> origin/CityVisUI
+        }
+
+
+        void Keyboard_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Keys.F5)
+            {
+
+                Builder.SafeBuild(@"..\..\..\Content", @"Content", @"..\..\..\Temp", "", false);
+
+                GameEngine.Reload();
+            }
+        }
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                SafeDispose(ref testLayer);
+            }
+            base.Dispose(disposing);
+        }
+
+
+        /// <summary>
+        /// Updates internal state of interface.
+        /// </summary>
+        /// <param Name="gameTime"></param>
+        public override void Update(GameTime gameTime)
+        {
+            console.Update(gameTime);
+            ui.Update(gameTime);
+            ui.Draw(gameTime, uiLayer);
+            
+        }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="endPoint"></param>
+		/// <param name="serverInfo"></param>
+		public override void DiscoveryResponse(System.Net.IPEndPoint endPoint, string serverInfo)
+		{
+			Log.Message("DISCOVERY : {0} - {1}", endPoint.ToString(), serverInfo);
+		}
+
+
+		/// <summary>
+		/// Shows message to user.
+		/// </summary>
+		/// <param name="message"></param>
+		public override void ShowMessage(string message)
+        {
+        }
+
+        /// <summary>
+        /// Shows message to user.
+        /// </summary>
+        /// <param Name="message"></param>
+        public override void ShowWarning(string message)
+        {
+        }
+
+        /// <summary>
+        /// Shows message to user.
+        /// </summary>
+        /// <param Name="message"></param>
+        public override void ShowError(string message)
+        {
+        }
+
+        /// <summary>
+        /// Shows message to user.
+        /// </summary>
+        /// <param Name="message"></param>
+        public override void ChatMessage(string message)
+        {
+        }
+
+//        public override void DiscoveryResponse(IPEndPoint endPoint, string serverInfo)
+//        {
+//            // throw new NotImplementedException();
+//        }
+    }
+}

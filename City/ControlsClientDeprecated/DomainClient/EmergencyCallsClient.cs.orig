@@ -1,0 +1,331 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Device.Location;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using City.UIFrames;
+using City.UIFrames.Converter;
+using City.UIFrames.Converter.Models;
+using Fusion.Core.Mathematics;
+using Fusion.Drivers.Graphics;
+using Fusion.Engine.Common;
+<<<<<<< HEAD
+=======
+using Fusion.Engine.Frames;
+using Fusion.Engine.Graphics;
+>>>>>>> origin/panel-framework
+using Fusion.Engine.Graphics.GIS;
+using Fusion.Engine.Graphics.GIS.GlobeMath;
+
+namespace City.ControlsClient.DomainClient
+{
+    public class EmergencyCallsClient : AbstractPulseClient
+    {
+        private PointsGisLayer globeCalls;
+        private List<EmcCall> allCalls;
+        private List<MunPolygon> mpols;
+        private List<PolyGisLayer> polyLayers;
+        private List<PolyGisLayer> _morning = new List<PolyGisLayer>();
+
+        private List<List<PolyGisLayer>> _polygonIntervals = new List<List<PolyGisLayer>>();
+        private List<LinesGisLayer> _boundsInterval = new List<LinesGisLayer>(); 
+         
+        /*for write missing*/
+
+
+        public override Frame AddControlsToUI()
+        {
+            if (!(Game.GameInterface is CustomGameInterface))
+                return null;
+            var ui = ((CustomGameInterface)Game.GameInterface).ui;
+//            var scenarioFrame = FrameHelper.createControlFrame(ui);
+            var controlElements = Generator.getControlElement(new CallsDataControlUI(globeCalls,_morning,_polygonIntervals,_boundsInterval),ui);
+//            scenarioFrame.transition(true);
+            return controlElements;
+        }
+
+        protected override void InitializeControl()
+        {
+        }
+
+        protected override void LoadControl(ControlInfo serverInfo)
+        {
+            base.LoadLevel(serverInfo);
+            var dir = (Game.GameClient as PulseMasterClient).Config.DataDir;
+
+            var calls = File.ReadAllLines(dir + @"SaintPetersburg\emergency_calls.csv").Skip(1).Select(a =>
+            {
+                var rawPost = a.Split(',');
+                return new EmcCall
+                {
+                    Lat = Double.Parse(rawPost[0], CultureInfo.InvariantCulture),
+                    Lon = Double.Parse(rawPost[1], CultureInfo.InvariantCulture),
+                };
+            }).ToList();
+
+            allCalls = calls;
+            
+            
+            //masterView.GisLayers.Add(new PolyGisLayer(Game, points, indeces));
+            var first_time = GeneratePolygonsWithFile("0-6_mundata.txt");
+            var sec_time = GeneratePolygonsWithFile("6-12_mundata.txt");
+            var third_time = GeneratePolygonsWithFile("12-18_mundata.txt");
+            var fourth_time = GeneratePolygonsWithFile("18-24_mundata.txt");
+
+            globeCalls = new PointsGisLayer(Game, allCalls.Count)
+            {
+                ImageSizeInAtlas = new Vector2(512, 512),
+                TextureAtlas = Game.Content.Load<Texture2D>("big_circle.tga")
+            };
+
+            for (int i = 0; i < allCalls.Count; i++)
+            {
+                var call = allCalls[i];
+                Color4 color = new Color4(0.8f, 0.8f, 0.8f, 1);// new Color4(0f, 0.74f, 1.0f, 1.0f);
+
+                //color = Color.Red;
+                globeCalls.PointsCpu[i] = new Gis.GeoPoint
+                {
+                    Lon = DMathUtil.DegreesToRadians(call.Lon),
+                    Lat = DMathUtil.DegreesToRadians(call.Lat),
+                    Color = color,
+                    Tex0 = new Vector4(0, 0, 0.2f/*0.11f*/, 0.0f)
+                };
+            }
+
+            globeCalls.UpdatePointsBuffer();
+
+            GisLayers.Add(globeCalls);
+
+            //drawContolUI();
+
+        }
+
+        public override void UnloadLevel()
+        {
+            base.UnloadLevel();
+        }
+
+        protected override byte[] UpdateControl(GameTime gameTime)
+        {
+            return new byte[0];
+        }
+
+        public override string UserInfo()
+        {
+            return $"ACS calls count: {allCalls.Count}";
+        }
+
+        public MunPolygon ReadPolygon(string line)
+        {
+            MunPolygon currentMunitipal = new MunPolygon();
+            var rawData = line.Split(','); 
+            if (rawData[0].Contains("MultiPolygon"))
+            {
+                rawData[0] =
+                    rawData[0].Replace("MultiPolygon ", "")
+                        .Replace("(((", "((")
+                        .Replace(")))", "))")
+                        .Replace("((", "")
+                        .Replace("))", ",");
+                List<string> polygonsData = rawData[0].Split(',').ToList();
+                foreach (var polygon in polygonsData)
+                {                    
+                    currentMunitipal.Points.Add(ReadSimplePolygon(polygon));
+                }
+            }
+            else
+            {
+                rawData[0] = rawData[0].Replace("Polygon ", "").Replace("((", "").Replace("))", ",");
+                currentMunitipal.Points.Add(ReadSimplePolygon(rawData[0]));
+            }
+
+            currentMunitipal.Lifefactor = double.Parse(rawData[8], CultureInfo.InvariantCulture);
+            currentMunitipal.Intensive = double.Parse(rawData[3], CultureInfo.InvariantCulture);
+            //currentMunitipal.NormCoeff = int.Parse(rawData[11]);
+            //currentMunitipal.NotNormCoeff = int.Parse(rawData[13]);
+            return currentMunitipal;
+        }
+
+        public List<GeoCoordinate> ReadSimplePolygon(string polygon)
+        {
+            List<GeoCoordinate> polyPoints = new List<GeoCoordinate>();
+            List<string> pointsData = polygon.Split(';').ToList();
+            foreach (var point in pointsData)
+            {
+                if(point == "") continue;
+                string newpoint = point[0] == ' ' ? point.Remove(0, 1) : point;
+                var s = newpoint.Split(' ');
+                GeoCoordinate newPolyPoint = new GeoCoordinate(double.Parse(newpoint.Split(' ')[1].Replace(",", " "), CultureInfo.InvariantCulture),
+                    double.Parse(newpoint.Split(' ')[0], CultureInfo.InvariantCulture));
+                polyPoints.Add(newPolyPoint);
+            }
+
+            return polyPoints;
+        }
+
+        public List<PolyGisLayer> GeneratePolygonsWithFile(string filename)
+        {
+            List<PolyGisLayer> curtimePolygons = new List<PolyGisLayer>();
+
+            var dir = (Game.GameClient as PulseMasterClient).Config.DataDir;
+
+            List<MunPolygon> mpols = File.ReadAllLines(dir + @"SaintPetersburg\" + filename).Skip(2).Select(a =>
+            {
+                return ReadPolygon(a);
+            }).ToList();
+
+            
+            foreach (var munPolygon in mpols)
+            {
+                for (int j = 0; j < munPolygon.Points.Count; j ++)
+                {
+                    if (munPolygon.Points[j].Count == 0) continue;
+
+                    var polyCoords = new DVector2[10000];
+                    for (int i = 0; i < munPolygon.Points[j].Count; i++)
+                    {
+                        GeoCoordinate cur_point = munPolygon.Points[j][i];
+                        polyCoords[i] = new DVector2(DMathUtil.DegreesToRadians(cur_point.Longitude), DMathUtil.DegreesToRadians(cur_point.Latitude));
+                    }
+                    
+                    var cont = PolyGisLayer.CreateFromContour(Game, polyCoords,Color.Red);
+                    cont.Texture = Game.Content.Load<Texture2D>("palette_v3");
+                    cont.PaletteTransparency = 0.35f;
+                    cont.PaletteValue =  (float) (munPolygon.Lifefactor * 1000);
+                    
+                    //0.4f + (0.1f*munPolygon.NormCoeff);
+                    GisLayers.Add(cont);
+                    cont.IsVisible = false;
+                    curtimePolygons.Add(cont); 
+                    _morning.Add(cont);                   
+                }
+            }
+
+            _polygonIntervals.Add(curtimePolygons);
+
+
+            int pointscount = GetPoligonsPointsCount(mpols);
+
+            var bounds = new LinesGisLayer(Game, 2*pointscount+1, true);
+            bounds.Flags = (int)(LinesGisLayer.LineFlags.DRAW_LINES);
+            int curline_number = 0;
+            //palette rgb
+            //247,70,98
+            //253,184,93
+            //253,228,112
+            //141,212,134
+            //20,176,129
+
+
+            foreach (var munPolygon in mpols)
+            {
+                for (int j = 0; j < munPolygon.Points.Count; j++)
+                {
+                    if (munPolygon.Points[j].Count == 0) continue;
+                    
+                    for (int i = 0; i < munPolygon.Points[j].Count; i++)
+                    {
+                        GeoCoordinate cur_point = munPolygon.Points[j][i];
+                        GeoCoordinate nextpoint = i == munPolygon.Points[j].Count - 1 ? munPolygon.Points[j][0] : munPolygon.Points[j][i + 1];
+
+                        Color clColor = Color.Aqua;
+                        if (munPolygon.Lifefactor*1000 >= 0.8) clColor = new Color(247,70,98);
+
+                        else if(munPolygon.Lifefactor*1000 >= 0.6) clColor = new Color(253,184,93);
+
+                        else if (munPolygon.Lifefactor*1000 >= 0.4) clColor = new Color(253,228,112);
+
+                        else if (munPolygon.Lifefactor*1000 >= 0.2) clColor = new Color(141,212,134);
+
+                        else clColor = new Color(20,176,129);
+
+
+
+                        bounds.PointsCpu[2* curline_number] = new Gis.GeoPoint
+                        {
+                            Lon = DMathUtil.DegreesToRadians(cur_point.Longitude),
+                            Lat = DMathUtil.DegreesToRadians(cur_point.Latitude),
+                            Color = clColor,//new Color4(0.8f,0.8f,0.8f,1),//new Color4(0.5f, 0.5f, 0.5f, 1.0f),
+                            Tex0 = new Vector4(0.02f, 0.0f, 0.0f, 0.0f) // Tex0.X - half width,
+                        };
+
+                        bounds.PointsCpu[2* curline_number + 1] = new Gis.GeoPoint
+                        {
+                            Lon = DMathUtil.DegreesToRadians(nextpoint.Longitude),
+                            Lat = DMathUtil.DegreesToRadians(nextpoint.Latitude),
+                            Color = clColor,//new Color4(0.8f, 0.8f, 0.8f, 1),//new Color4(0.5f, 0.5f, 0.5f, 1.0f),
+                            Tex0 = new Vector4(0.02f, 0.0f, 0.0f, 0.0f) // Tex0.X - half width
+                        };                        
+
+                        curline_number += 1;
+                    }
+                   
+                }
+            }
+            bounds.UpdatePointsBuffer();
+            bounds.IsVisible = false;
+            GisLayers.Add(bounds);
+
+            _boundsInterval.Add(bounds);
+
+
+            return curtimePolygons;
+        }
+
+        public int GetPoligonsPointsCount(List<MunPolygon> pols)
+        {
+            int count = 0;
+            foreach (var munPolygon in pols)
+            {
+                foreach (var poly in munPolygon.Points)
+                {
+                    count += poly.Count;
+                }
+            }
+            return count;
+        }
+
+//        public void drawContolUI()
+//        {
+//            if (!(Game.GameInterface is CustomGameInterface))
+//                return;
+//            var ui = ((CustomGameInterface)Game.GameInterface).ui;
+//            var scenarioFrame = FrameHelper.createControlFrame(ui);
+//            ui.RootFrame.Add(scenarioFrame);
+//            //Generator.fillFrame(scenarioFrame, new SentimentControlUI(globeCalls), ui);
+//            Generator.fillFrame(scenarioFrame, new CallsDataControlUI(globeCalls,_morning,_polygonIntervals,_boundsInterval),ui);
+//            scenarioFrame.transition(true);
+//        }
+    }
+
+    public class EmcCall
+    {
+        public double Lat { get; set; }
+        public double Lon { get; set; }
+    }
+
+    public class MunPolygon
+    {
+        public List<List<GeoCoordinate>> Points { get; set; }
+        public string Name { get; set; }
+        public double Intensive { get; set; }
+        public int NormCoeff { get; set; }
+        public int NotNormCoeff { get; set; }
+        public double Lifefactor { get; set; }
+
+        public List<int> CallsCount { get; set; } = new List<int>();
+        public List<double> PeopleDensity { get; set; } = new List<double>();
+        public  List<double> AverageHospitalTimes { get; set; } = new List<double>();
+        public List<double> EmcWorkFactors { get; set; } = new List<double>(); 
+
+
+        public MunPolygon()
+        {
+            Points = new List<List<GeoCoordinate>>();
+        }
+    }
+
+   
+}

@@ -1,0 +1,4 @@
+[
+{"disname": "flu", "inf_rate": "0.3","recov_rate": "0.1","death_rate": "0.001","dis_scale":"0.5"}, 
+{"disname": "smallpox", "inf_rate": "0.4","recov_rate": "0.1","death_rate": "0.01","dis_scale":"0.1"}
+]

@@ -1,0 +1,309 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using City.UIFrames;
+using Fusion;
+using Fusion.Core.Mathematics;
+using Fusion.Drivers.Graphics;
+using Fusion.Engine.Common;
+using Fusion.Engine.Frames;
+using Fusion.Engine.Graphics.GIS;
+using Fusion.Engine.Graphics.GIS.DataSystem.MapSources.Projections;
+using Fusion.Engine.Graphics.GIS.GlobeMath;
+using Fusion.Engine.Input;
+<<<<<<< HEAD
+=======
+using City.UIFrames;
+using Fusion.Engine.Frames;
+using System.Net;
+using System.Net.Cache;
+using City.UIFrames.Converter;
+using City.UIFrames.Converter.Models;
+>>>>>>> origin/panel-framework
+
+namespace City.ControlsClient.DomainClient
+{
+    public class InstagramClient : AbstractPulseClient
+    {
+        private PointsGisLayer globePosts;
+        private HeatMapLayer heatMap;
+        private int pointsToDraw = 0;
+        private List<InstagramPost> currentPosts;
+        private List<Frame> frames;
+		public List<InstagramPost>[] postsGroupByHour { get; set; }
+        bool Pause  {get; set; }
+
+        public TimeSpan currentTime { get; set; }
+        private float tt = 0;
+        float speed = 1.00f;
+
+        double  timeStepInSeconds   = 60;
+        double  sizeOfMovingWindow  = 20;   // (sizeOfMovingWindow + 2 * timeOfFadeOut) should be less than 60
+        int     timeOfFadeOut       = 15;    // (sizeOfMovingWindow + 2 * timeOfFadeOut) should be less than 60
+
+        public override Frame AddControlsToUI()
+        {
+            if (!(Game.GameInterface is CustomGameInterface))
+                return null;
+            var ui = ((CustomGameInterface)Game.GameInterface).ui;
+            var controlElements = Generator.getControlElement(new InstagramUI(), ui);
+            return controlElements;
+        }
+
+        protected override void InitializeControl()
+        {
+        }
+
+        protected override void LoadControl(ControlInfo controlInfo)
+        {
+            base.LoadLevel(controlInfo);
+            var dir = (Game.GameClient as PulseMasterClient).Config.DataDir;
+            postsGroupByHour = new List<InstagramPost>[24];
+            for (int i = 0; i < postsGroupByHour.Length; i++)
+            {
+                postsGroupByHour[i] = new List<InstagramPost>();
+            }
+
+            var postsReader = File.ReadAllLines(dir + @"SaintPetersburg\instagram_dataset.csv").Skip(1);
+            foreach (var p in postsReader)
+            {
+                var rawPost = p.Split(';');
+                var post = new InstagramPost
+                {
+                    Id = rawPost[0],
+                    TimeStamp = DateTime.Parse(rawPost[1]),
+                    Url = rawPost[2],
+                    Lat = Double.Parse(rawPost[3], CultureInfo.InvariantCulture),
+                    Lon = Double.Parse(rawPost[4], CultureInfo.InvariantCulture)
+                };
+                int arrayId = post.TimeStamp.Hour;
+                postsGroupByHour[arrayId].Add(post);
+            }
+
+            for ( int i=0; i < postsGroupByHour.Length; i++)
+            {
+                postsGroupByHour[i] = postsGroupByHour[i].OrderBy((x) => x.TimeStamp.TimeOfDay).ToList();                
+            }          
+
+            currentTime = new TimeSpan(22,20,0);
+            int maxDots = postsGroupByHour.Max((x) => x.Count) * 2;
+            currentPosts = new List<InstagramPost>();
+
+            globePosts = new PointsGisLayer(Game, maxDots)
+            {
+                ImageSizeInAtlas    = new Vector2(512, 512),
+                TextureAtlas        = Game.Content.Load<Texture2D>("big_circle.tga")
+            };
+            
+            GisLayers.Add(globePosts);
+
+            heatMap = HeatMapLayer.GenerateHeatMapWithRegularGrid(Game, 29.425507, 30.701294, 60.182843, 59.759508, 30, 512, 512, new MercatorProjection());
+            heatMap.MaxHeatMapLevel = 3000.01f;
+            heatMap.InterpFactor	= 1.0f;
+	        heatMap.HeatMapTransparency = 1.0f;
+            heatMap.MinHeatMapLevel = -300.0f;
+
+            GisLayers.Add(heatMap);
+            heatMap.IsVisible = true;
+
+			//Game.Keyboard.KeyUp += (x, y) => { if (y.Key == Keys.LeftButton) onMouseClick(Game.Mouse.Position.X, Game.Mouse.Position.Y); };
+
+			Pause = false;
+			frames = new List<Frame>();
+		}
+
+		public override void UnloadLevel()
+        {
+            base.UnloadLevel();
+        }
+
+        protected override byte[] UpdateControl(GameTime gameTime)
+        {
+            if (!Pause)
+            {
+                tt += gameTime.ElapsedSec;
+                if (tt > speed)
+                {
+                    tt = tt - speed;
+				}
+                currentTime = currentTime.Add(TimeSpan.FromSeconds(timeStepInSeconds));
+				drawPostedPoints(currentTime);
+            }
+			//Pause = true;
+			//if (Game.Keyboard.IsKeyDown(Keys.LeftButton))
+			//  onMouseClick();
+			if (Game.Keyboard.IsKeyDown(Keys.J))
+			{
+				frames.ForEach((x) => x.Parent.Remove(x));
+			}
+			return new byte[0];
+        }
+        
+        public override string UserInfo()
+        {
+            return $"Instagram posts count: ";
+        }
+
+        private void drawPostedPoints(TimeSpan time)
+        {
+            heatMap.ClearData();
+            currentPosts.Clear();
+            for (int i = 0; i < globePosts.PointsCount; i++)
+            {
+                globePosts.PointsCpu[i].Color.Alpha = 0;
+            }
+
+            int id = time.Hours;
+            double currentMinutes = time.Minutes;
+            pointsToDraw = 0;            
+
+            double leftLimit = (currentMinutes - sizeOfMovingWindow / 2 - timeOfFadeOut);
+            double rightLimit = (currentMinutes + sizeOfMovingWindow / 2 + timeOfFadeOut);
+            int fadeLeft = timeOfFadeOut;
+            int fadeRight = timeOfFadeOut;
+
+            if ( (int) rightLimit > 60)
+            {
+                int hourId = (id + 1) % 24;
+                int right = (int) rightLimit - 60;
+                fadeRight = 0;
+                if (right < timeOfFadeOut) {
+                    fadeRight = timeOfFadeOut - right;
+                }
+                makePointsVisible(hourId, 0, right, 0, timeOfFadeOut);
+                rightLimit = 60;
+            }
+
+            if ((int) leftLimit < 0 )
+            {
+                int hourId = (id != 0) ? id - 1 : 23;
+                int left = 60 + (int) leftLimit;
+                fadeLeft = 0;
+                if (Math.Abs(leftLimit) < timeOfFadeOut)
+                {
+                    fadeLeft = timeOfFadeOut - (int) Math.Abs(leftLimit);
+                }
+                makePointsVisible(hourId, left, 60, timeOfFadeOut, 0);
+                leftLimit = 0;
+            }           
+
+            makePointsVisible(id, (int) leftLimit, (int) rightLimit, fadeLeft, fadeRight);  
+                                 
+            globePosts.UpdatePointsBuffer();                                   
+            heatMap.UpdateHeatMap();
+
+           // Log.Message("" + pointsToDraw);
+           // Log.Message("" + currentTime);
+        }
+
+        private int makePointsVisible(int hour, int leftLimMinutes, int rightLimMinutes, int fadeLeftTime, int fadeRightTime)
+        {            
+            int drawID = 0;
+            int finalPoint = postsGroupByHour[hour].Count;
+            for (int i = 0; i < finalPoint; i++)
+            {
+                var post = postsGroupByHour[hour][i];
+                var postMinutes = post.TimeStamp.Minute;
+
+                if (postMinutes > rightLimMinutes) break;
+                if (postMinutes < leftLimMinutes)
+                {
+                    if (fadeLeftTime != 0) drawID++;
+                    continue;
+                };
+
+                float alpha = 1.0f;
+                if (fadeLeftTime != 0 && postMinutes  <= fadeLeftTime + leftLimMinutes)
+                {
+                    alpha = (float)  (postMinutes - leftLimMinutes + (timeOfFadeOut - fadeLeftTime)) / timeOfFadeOut;
+                }
+
+                if (fadeRightTime != 0 && postMinutes >= rightLimMinutes - fadeRightTime)
+                {
+                    alpha = (float) (rightLimMinutes - postMinutes + (timeOfFadeOut - fadeRightTime)) / timeOfFadeOut;
+                }
+
+                globePosts.PointsCpu[pointsToDraw] = new Gis.GeoPoint
+                {
+                    Lon = DMathUtil.DegreesToRadians(post.Lon),
+                    Lat = DMathUtil.DegreesToRadians(post.Lat),
+                    Color = new Color(ColorConstant.LiteBlue.ToColor3(), alpha),
+                    Tex0 = new Vector4(0, 0, 0.11f, 0.0f)
+                };
+                heatMap.AddValue(post.Lon, post.Lat, 300.0f * alpha);
+                currentPosts.Insert(pointsToDraw, post);
+                pointsToDraw++;
+            }
+            //pointsToDraw--;
+            return drawID;
+        }
+
+        //action on mouse
+        public void onMouseClick(int mouseX, int mouseY)
+        {
+            if (!globePosts.IsVisible) return;
+            DVector2 mousePosition;
+
+            //TODO select proper viewlayer
+            ViewLayers.First().GlobeCamera.ScreenToSpherical(Game.Mouse.Position.X, Game.Mouse.Position.Y, out mousePosition);
+
+            for (int i = 0; i < currentPosts.Count; i++)
+            {                
+                var post = globePosts.PointsCpu[i];
+                if (post.Color.Alpha == 0) continue;
+                var distance = GeoHelper.DistanceBetweenTwoPoints(mousePosition, new DVector2(post.Lon, post.Lat));
+
+                if (distance < post.Tex0.Z)
+                {                    
+                    Log.Message("" + currentPosts.ElementAt(i).TimeStamp);
+					Log.Message("" + currentTime);
+					//Pause = true;
+
+					if (!(Game.GameInterface is CustomGameInterface))
+                        return;
+                    var ui = ((CustomGameInterface)Game.GameInterface).ui;
+
+					var url = currentPosts.ElementAt(i).Url;
+
+					var frame = FrameHelper.createInstagramPhotoFrame(ui, mouseX, mouseY, 150, 150, "inst_load", url);
+					frames.Add(frame);
+					ui.RootFrame.Add(frame);
+					break;
+                }
+            }
+        }
+
+
+		string GetFileNameFromUrl(string url)
+		{
+			url = url.Replace(":", "");
+			url = url.Replace("/", "");
+			url = url.Replace(".", "");
+			url = url.Remove(url.Length - 3);
+
+			return url;
+		}
+
+		public void changePointsVisibility()
+        {
+            globePosts.IsVisible = !globePosts.IsVisible;
+        }
+
+        public void changeHeatmapVisibility()
+        {
+            heatMap.IsVisible = !heatMap.IsVisible;
+        }
+
+		//update size
+		public void updateSize(float size)
+		{
+			for (int i = 0; i < globePosts.PointsCount; i++)
+			{
+				globePosts.PointsCpu[i].Tex0.Z = size;
+			}
+			globePosts.UpdatePointsBuffer();
+		}
+	}
+}

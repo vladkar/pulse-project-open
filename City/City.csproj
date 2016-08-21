@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8BECF46B-DFE4-44F0-BBED-5D4DD3F1F695}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>City</RootNamespace>
+    <AssemblyName>City</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Users\user\FusionEngine\Bin\Release\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlsClientDeprecated\AbstractPulseAgentClient.cs" />
+    <Compile Include="ControlsClientDeprecated\AbstractPulseClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\EmergencyCallsClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\FmsClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\HarsiddhiTempleClient3D.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\HarsiddhiTempleClient.cs" />
+    <Compile Include="ControlsClient\DomainClient\Instagram\InstagramView.cs" />
+    <Compile Include="ControlsClient\DomainClient\Instagram\InstagramControl.cs" />
+    <Compile Include="ControlsClient\DomainClient\PulseAgent\VkFestAgentControl.cs" />
+    <Compile Include="ControlsClient\DomainClient\PulseAgent\VkFestGraphics.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\LandscapeGenerator.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\TrainServer.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\TrainControl.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\TrainGraphics.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\TrainMapView.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\TrainModelView.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\TrainRoute.cs" />
+    <Compile Include="ControlsClient\DomainClient\Train\TrainSchedule.cs" />
+    <Compile Include="ControlsClient\DomainClient\VKFest\JsonReader\ControllerReader.cs" />
+    <Compile Include="ControlsClient\DomainClient\VKFest\JsonReader\Post.cs" />
+    <Compile Include="ControlsClient\DomainClient\VKFest\UI\NewsFeed.cs" />
+    <Compile Include="ControlsClient\DomainClient\VKFest\UI\NewsFeedElement.cs" />
+    <Compile Include="ControlsClient\DomainClient\VKFest\VkFestControl.cs" />
+    <Compile Include="ControlsClient\DomainClient\VKFest\VKFestView.cs" />
+    <Compile Include="ControlsClient\DomainClient\VK\VKSentControl.cs" />
+    <Compile Include="ControlsClient\DomainClient\VK\VKSentView.cs" />
+    <Compile Include="ControlsClient\GeoTaggedEntity.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\HospitalClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\NovokrestovskayaClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\KrestovskyClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\MacroSubwayClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\TrafficClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\WhoreClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\SurveillanceCameraClient.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\SentimentClient.cs" />
+    <Compile Include="GeoBanner.cs" />
+    <Compile Include="GeoGrid4KmTo250m.cs" />
+    <Compile Include="ModelServer\DiseaseMacroClient.cs" />
+    <Compile Include="Models\Polygon.cs" />
+    <Compile Include="ControlsClient\AbstractPulseAgentControl.cs" />
+    <Compile Include="ControlsClient\AbstractPulseControl.cs" />
+    <Compile Include="ControlsClient\AbstractPulseView.cs" />
+    <Compile Include="ControlsClient\DomainClient\PulseAgent\PulseMicroModelBeautyView.cs" />
+    <Compile Include="ControlsClient\DomainClient\PulseAgent\PulseMicroModelDeveloperView.cs" />
+    <Compile Include="ControlsClient\DomainClient\PulseAgent\PulseMicroModelControl.cs" />
+    <Compile Include="ControlsClient\IPulseClient.cs" />
+    <Compile Include="Panel\PanelManager.cs" />
+    <Compile Include="Panel\PulsePanel.cs" />
+    <Compile Include="Panel\GisPanel.cs" />
+    <Compile Include="ControlsServer\PulseServer.cs" />
+    <Compile Include="ControlsClientDeprecated\DomainClient\InstagramClient.cs" />
+    <Compile Include="ControlsClientDeprecated\IPulseClient.cs" />
+    <Compile Include="ControlsServer\TrafficServer.cs" />
+    <Compile Include="GlobalStrings.Designer.cs">
+      <DependentUpon>GlobalStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="PulseMasterClient.cs" />
+    <Compile Include="CustomGameInterface.cs" />
+    <Compile Include="PulseMasterServer.cs" />
+    <Compile Include="ControlFactory.cs" />
+    <Compile Include="Snapshot\Navfield\NavfieldSnapshotExtension.cs" />
+    <Compile Include="Snapshot\PulseAgent\IPulseMapData.cs" />
+    <Compile Include="Snapshot\Navfield\NavfieldSnapshotExtensionSerializer.cs" />
+    <Compile Include="Snapshot\PulseAgent\PulseExchangeSnapshot.cs" />
+    <Compile Include="Snapshot\PulseAgent\PulseMapsData.cs" />
+    <Compile Include="Snapshot\PulseAgent\SfAgent.cs" />
+    <Compile Include="Snapshot\PulseAgent\SubwayStationSnapshotExtension.cs" />
+    <Compile Include="Snapshot\PulseAgent\SubwayStationSnapshotExtensionSerializer.cs" />
+    <Compile Include="Snapshot\Serialization\IPulseSnapshotSerializer.cs" />
+    <Compile Include="Snapshot\Snapshot\CommandSnapshot.cs" />
+    <Compile Include="Snapshot\Snapshot\ICommandSnapShot.cs" />
+    <Compile Include="Snapshot\Snapshot\IExchangeSnapshot.cs" />
+    <Compile Include="Snapshot\Snapshot\ISnapshotExtension.cs" />
+    <Compile Include="Snapshot\Serialization\IPulseSnapshotControlExtensionSerializer.cs" />
+    <Compile Include="Snapshot\TrafficAgent\TrafficCallData.cs" />
+    <Compile Include="Snapshot\TrafficAgent\TrafficEdgeData.cs" />
+    <Compile Include="Snapshot\TrafficAgent\TrafficEmcPathData.cs" />
+    <Compile Include="Snapshot\TrafficAgent\TrafficSelectData.cs" />
+    <Compile Include="Snapshot\Infection\InfectionSnapshotExtensionSerializer.cs" />
+    <Compile Include="Snapshot\Infection\InfectionSnapshotExtension.cs" />
+    <Compile Include="Snapshot\Serialization\PulseSnapshotBinarySerializer.cs" />
+    <Compile Include="Snapshot\PulseAgent\PulseSnapshot.cs" />
+    <Compile Include="Snapshot\Serialization\IPulseSnapshotControlSerializer.cs" />
+    <Compile Include="Snapshot\Snapshot\ISnapshot.cs" />
+    <Compile Include="Snapshot\PulseAgent\PulseAgentData.cs" />
+    <Compile Include="Snapshot\PulseAgent\PulseAgentBinarySerializer.cs" />
+    <Compile Include="ControlsServer\IPulseServer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Snapshot\SnapshotUtil.cs" />
+    <Compile Include="Snapshot\TrafficAgent\TrafficAgentData.cs" />
+    <Compile Include="Snapshot\TrafficAgent\TrafficBinarySerializer.cs" />
+    <Compile Include="Snapshot\TrafficAgent\TrafficSnapshot.cs" />
+    <Compile Include="UIFrames\ColorConstant.cs" />
+    <Compile Include="UIFrames\ConstantFrameUI.cs" />
+    <Compile Include="UIFrames\Converter\Attribute\ButtonAttribute.cs" />
+    <Compile Include="UIFrames\Converter\Attribute\CheckboxAttribute.cs" />
+    <Compile Include="UIFrames\Converter\Attribute\ClassAttribute.cs" />
+    <Compile Include="UIFrames\Converter\Attribute\EditBoxAttribute.cs" />
+    <Compile Include="UIFrames\Converter\Generator.cs" />
+    <Compile Include="UIFrames\Converter\Models\CallsDataControlUI.cs" />
+    <Compile Include="UIFrames\Converter\Models\PulseAgentUI.cs" />
+    <Compile Include="UIFrames\Converter\Models\InstagramUI.cs" />
+    <Compile Include="UIFrames\Converter\Attribute\UIAttribute.cs" />
+    <Compile Include="UIFrames\Converter\Attribute\SliderAttribute.cs" />
+    <Compile Include="UIFrames\Converter\Models\SentimentControlUI.cs" />
+    <Compile Include="UIFrames\FrameElement\Button.cs" />
+    <Compile Include="UIFrames\FrameElement\ButtonIcon.cs" />
+    <Compile Include="UIFrames\FrameElement\Checkbox.cs" />
+    <Compile Include="UIFrames\FrameElement\DropDownList.cs" />
+    <Compile Include="UIFrames\FrameElement\EditBox.cs" />
+    <Compile Include="UIFrames\FrameElement\GraphicBase.cs" />
+    <Compile Include="UIFrames\FrameElement\Header.cs" />
+    <Compile Include="UIFrames\FrameElement\BarChart.cs" />
+    <Compile Include="UIFrames\FrameElement\IconWithText.cs" />
+    <Compile Include="UIFrames\FrameElement\ImageButton.cs" />
+    <Compile Include="UIFrames\FrameElement\ImageWithText.cs" />
+    <Compile Include="UIFrames\FrameElement\ModelElement\ConfigPlot.cs" />
+    <Compile Include="UIFrames\FrameElement\RichTextBlock.cs" />
+    <Compile Include="UIFrames\FrameElement\TrainMapLabel.cs" />
+    <Compile Include="UIFrames\FrameElement\Label.cs" />
+    <Compile Include="UIFrames\FrameElement\Legenda.cs" />
+    <Compile Include="UIFrames\FrameElement\ListBox.cs" />
+    <Compile Include="UIFrames\FrameElement\PlayerControlPanel.cs" />
+    <Compile Include="UIFrames\FrameElement\Plot.cs" />
+    <Compile Include="UIFrames\FrameElement\Scroll.cs" />
+    <Compile Include="UIFrames\FrameElement\Slider.cs" />
+    <Compile Include="UIFrames\FrameElement\TreeNode.cs" />
+    <Compile Include="UIFrames\FrameElement\VideoFrame.cs" />
+    <Compile Include="UIFrames\FrameElement\ViewFrame.cs" />
+    <Compile Include="UIFrames\FrameElement\WebPostFrame.cs" />
+    <Compile Include="UIFrames\FrameHelper.cs" />
+    <Compile Include="UIFrames\FrameElement\MapLegend.cs" />
+    <Compile Include="UIFrames\Impl\ComplexLegend.cs" />
+    <Compile Include="UIFrames\Impl\InstagramToolPanel.cs" />
+    <Compile Include="UIFrames\Impl\MenuPanel.cs" />
+    <Compile Include="UIFrames\Impl\LegendFrameUI.cs" />
+    <Compile Include="UIFrames\Impl\MainFrameUI.cs" />
+    <Compile Include="UIFrames\Impl\MultiViewPanel.cs" />
+    <Compile Include="UIFrames\Impl\ControlsPanel.cs" />
+    <Compile Include="UIFrames\Impl\Orientation.cs" />
+    <Compile Include="UIFrames\Impl\SpecialBottomFrame.cs" />
+    <Compile Include="UIFrames\Impl\StatusFrameUI.cs" />
+    <Compile Include="UIFrames\Impl\TopPanel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Content\.content" />
+    <None Include="Content\palette2.tga" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\Pulse.MultiagentEngine.csproj">
+      <Project>{db8c28f6-d975-4ccb-83cf-4f58765d0826}</Project>
+      <Name>Pulse.MultiagentEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Common\Pulse.Common.csproj">
+      <Project>{6DE9E73C-806D-451B-998C-E04B5D18EE79}</Project>
+      <Name>Pulse.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Model\Pulse.Model.csproj">
+      <Project>{34659522-51BF-4F52-96A4-5DBEE2B61121}</Project>
+      <Name>Pulse.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pulse.Plugin.SimpleInfection\Pulse.Plugin.SimpleInfection.csproj">
+      <Project>{8F42BF51-F664-4725-ACB5-1A4193CBB40C}</Project>
+      <Name>Pulse.Plugin.SimpleInfection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GlobalStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\COLOURlovers.com_Mind_Wanderer.svg" />
+    <Content Include="Content\grad - 100%25.png" />
+    <Content Include="Content\palette_v3.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(registry:HKEY_CURRENT_USER\Software\FusionEngine@BuildDir)\FusionProject.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,40 @@
+﻿{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+	"ScenarioName": "Luchegorsk",
+    "VisName": "Лучегорск   ^2MERS-CoV",
+	"DataSubDirectory": "Luchegorsk",
+	
+	"TimeStep": 3600,
+	"ToSecondsMultiplier": 1,
+	"TimeStart": "2014-10-7T07:00:00.000+04:00",
+	
+	"InitialPopulation": 10000,
+	
+	"MapPointDL": {"X": 0, "Y": 0},
+	"MapPointUR": {"X": 10000, "Y": 10000},
+	"ToMetersMultiplier": 1,
+	"GeoPointDL": {"Lat": 46.377, "Lon": 134.177},
+    "GeoPointUR": {"Lat": 46.521, "Lon": 134.433},
+    "PreferredCoordinates":  "geo",
+	
+    "SimulationType":  "Luchegorsk",
+
+	"Plugins": {
+		
+		"QuadTree": {
+			"GlobalQuadrantSize": 10000,
+			"QuadrantSizeMin": 5,
+			"QuadrantSizeMan": 200
+		},
+		
+		"RoadGraph": {		
+		},
+		
+		"SimpleInfection": {
+			"InfectionName": "mers",
+            "InfectionInitialization":  "luchegorsk"
+		}
+	},
+
+	"ActivePlugins": ["SimpleInfection"]
+}

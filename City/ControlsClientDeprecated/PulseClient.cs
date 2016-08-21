@@ -1,0 +1,328 @@
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using City.ControlsServer;
+using City.Snapshot;
+using Fusion.Core.Mathematics;
+using Fusion.Drivers.Graphics;
+using Fusion.Engine.Common;
+using Fusion.Engine.Graphics;
+using Fusion.Engine.Graphics.GIS;
+using Fusion.Engine.Graphics.GIS.GlobeMath;
+using Fusion.Engine.Input;
+using Pulse.Common.ConfigSystem;
+using Pulse.Common.Engine;
+using Pulse.Common.Utils;
+using Pulse.Model;
+using Pulse.Model.Environment;
+using Pulse.MultiagentEngine.Engine;
+
+namespace City.ControlsClient
+{
+
+    public class PulseClient : IPulseClient
+    {
+        public GameEngine GameEngine { get; protected set; }
+
+
+        private SpriteLayer _testLayer;
+        private IDictionary<string, DiscTexture> _textures;
+        private ViewLayer _masterLayer;
+
+        #region pulse fields
+
+        private ModelFactoryReflection _engineFactory;
+        private PulseScenarioConfig _config;
+        private PulseEngine _engine;
+        private PulseMapData _pulseMap;
+
+        //private string _scenario;
+        private CoordType _coordSystem;
+        public ControlInfo ControlConfig { get; set; }
+
+        #endregion
+
+        private PulseAgentBinarySerializer _pba;
+        private ISnapshot _currentSnapShot;
+
+	    private PointsGisLayer		agentsLayer;
+	    private ModelLayer			subwayAgents;
+	    private AnimatedModelLayer	leftTrain;
+		private AnimatedModelLayer	rightTrain;
+
+		//TODO remove this shit and all references (demo kostyl)
+		//private PulseServer _tempSrv;
+
+		private TilesGisLayer tileMap;
+	    private PolyGisLayer polyMap;
+	    private PolyGisLayer krestMap;
+	    private PolyGisLayer itmoBilds;
+	    private HeatMapLayer heatMap;
+
+		public PulseClient()
+        {
+        }
+
+        public void Initialize(GameEngine gameEngine, ViewLayer masterLayer)
+        {
+            GameEngine = gameEngine;
+            _masterLayer = masterLayer;
+            
+			_testLayer = new SpriteLayer(GameEngine.GraphicsEngine, 1024);
+            _textures = new ConcurrentDictionary<string, DiscTexture>();
+            _textures["circle"] = GameEngine.Content.Load<DiscTexture>("a");
+            _textures["black"] = GameEngine.Content.Load<DiscTexture>("b");
+
+            _pba = new PulseAgentBinarySerializer();
+
+            _masterLayer.SpriteLayers.Add(_testLayer);
+
+
+
+            //_tempSrv = new PulseServer();
+            //_tempSrv.Initialize();
+        }
+
+        public void LoadLevel(ControlInfo controlInfo)
+        {
+            ControlConfig = controlInfo;
+
+            if (_engineFactory == null)
+                _engineFactory = new ModelFactoryReflection();
+
+            _config = _engineFactory.GetConfig(ControlConfig.Scenario);
+            _engine = _engineFactory.GetEngine(_config, SimulationRunMode.StepByStep) as PulseEngine;
+            _engine.Start();
+            _pulseMap = _engine.World.Map.GetMapData() as PulseMapData;
+            Configure(_engine.ScenarioConfig);
+
+            //_tempSrv.LoadLevel(_scenario);
+
+
+	        if (ControlConfig.Scenario.ToLower() == "krestovsky") {
+
+		        tileMap = new TilesGisLayer(GameEngine, _masterLayer.GlobeCamera);
+		        tileMap.SetMapSource(TilesGisLayer.MapSource.GoogleSatteliteMap);
+                _masterLayer.GisLayers.Add(tileMap);
+
+		        polyMap = PolyGisLayer.CreateFromUtmFbxModel(GameEngine, "mapspb_342631_6664090_36N");
+		        polyMap.Flags = (int)(PolyGisLayer.PolyFlags.VERTEX_SHADER | PolyGisLayer.PolyFlags.PIXEL_SHADER | PolyGisLayer.PolyFlags.XRAY);
+		        polyMap.IsVisible = false;
+
+				krestMap = PolyGisLayer.CreateFromUtmFbxModel(GameEngine, "krest_342631_6664090_36N");
+				krestMap.Flags = (int)(PolyGisLayer.PolyFlags.VERTEX_SHADER | PolyGisLayer.PolyFlags.PIXEL_SHADER | PolyGisLayer.PolyFlags.XRAY);
+				krestMap.IsVisible = false;
+
+				itmoBilds = PolyGisLayer.CreateFromUtmFbxModel(GameEngine, "itmoscaled_342631_6664090_36N");
+				itmoBilds.Flags = (int)(PolyGisLayer.PolyFlags.VERTEX_SHADER | PolyGisLayer.PolyFlags.PIXEL_SHADER | PolyGisLayer.PolyFlags.XRAY);
+				itmoBilds.IsVisible = false;
+
+				heatMap = HeatMapLayer.GenerateHeatMapWithRegularGrid(GameEngine, 30.210857, 30.229397, 59.975717, 59.957073, 10, 256, 256, tileMap.CurrentMapSource.Projection);
+		        heatMap.MaxHeatMapLevel = 10;
+		        heatMap.InterpFactor = 1.0f;
+
+				_masterLayer.GisLayers.Add(polyMap);
+				_masterLayer.GisLayers.Add(krestMap);
+				_masterLayer.GisLayers.Add(itmoBilds);
+				_masterLayer.GisLayers.Add(heatMap);
+
+				agentsLayer = new PointsGisLayer(GameEngine, 30000, false) {
+					ImageSizeInAtlas = new Vector2(36, 36),
+					TextureAtlas = GameEngine.Content.Load<Texture2D>("circles.tga")
+				}; 
+				_masterLayer.GisLayers.Add(agentsLayer);
+			}
+	        if (ControlConfig.Scenario.ToLower() == "novokrest") {
+				polyMap = PolyGisLayer.CreateFromUtmFbxModel(GameEngine, "mapspb_342631_6664090_36N");
+				polyMap.Flags = (int)(PolyGisLayer.PolyFlags.VERTEX_SHADER | PolyGisLayer.PolyFlags.PIXEL_SHADER | PolyGisLayer.PolyFlags.XRAY);
+				polyMap.IsVisible = true;
+
+				_masterLayer.GisLayers.Add(polyMap);
+
+//				var lines = LinesGisLayer.GenerateGrid(GameEngine, new DVector2(28.751221, 60.704104), new DVector2(31.893311, 59.495303), 25, 25, new Color(0.3f, 0.3f, 0.3f, 0.3f), new Fusion.Engine.Graphics.GIS.DataSystem.MapSources.Projections.MercatorProjection(), true);
+//				lines.ZOrder = 100;
+//                _masterLayer.GisLayers.Add(lines);
+
+				_masterLayer.GisLayers.Add(new ModelLayer(GameEngine, new DVector2(30.211694, 59.972990), "abstr_station_zero_coords") {
+					ScaleFactor = 1.0f,
+					XRay	= true,
+					ZOrder	= 1000
+				});
+
+				subwayAgents = new ModelLayer(GameEngine, new DVector2(30.211694, 59.972990), "human_agent", 3000) {
+					ZOrder = 1000
+				};
+
+		        leftTrain = new AnimatedModelLayer(GameEngine, new DVector2(30.211694, 59.972990), "train_right_zerocoord") {
+					XRay	= false,
+					ZOrder	= 500
+		        };
+
+				rightTrain = new AnimatedModelLayer(GameEngine, new DVector2(30.211694, 59.972990), "train_left_zerocoord") {
+					XRay	= false,
+					ZOrder	= 500
+				};
+
+				_masterLayer.GisLayers.Add(subwayAgents);
+				_masterLayer.GisLayers.Add(leftTrain);
+				_masterLayer.GisLayers.Add(rightTrain);
+			}
+		}
+
+        private void Configure(PulseScenarioConfig scenarioConfig)
+        {
+            _coordSystem = scenarioConfig.PreferredCoordinates.Value == "geo" ? CoordType.Geo : CoordType.Map;
+        }
+
+        public void UnloadLevel()
+        {
+        }
+
+        public void FeedSnapshot(ISnapshot snapshot)
+        {
+            _currentSnapShot = snapshot;
+        }
+
+
+
+		float t = 0.0f;
+	    float dir = 1.0f;
+        public byte[] Update(GameTime gameTime)
+        {
+			//_testLayer.Clear();
+
+	        if (ControlConfig.Scenario.ToLower() == "krestovsky") {
+		        var s = _currentSnapShot as PulseSnapshot;
+		        if (s != null) {
+			        for (int i = 0; i < s.Agents.Count; i++) {
+				        agentsLayer.PointsCpu[i] = new Gis.GeoPoint
+				        {
+					        Lon = DMathUtil.DegreesToRadians(s.Agents[i].Y),
+					        Lat = DMathUtil.DegreesToRadians(s.Agents[i].X),
+					        Color = Color.White,
+					        Tex0 = new Vector4(0, 0, 0.002f, 3.14f)
+				        };
+
+						heatMap.AddValue(s.Agents[i].Y, s.Agents[i].X, 10.0f);
+                    }
+			        agentsLayer.UpdatePointsBuffer();
+			        agentsLayer.PointsCountToDraw = s.Agents.Count;
+					heatMap.UpdateHeatMap();
+                }
+
+
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad0)) {
+				    tileMap.IsVisible	= true;
+				    polyMap.IsVisible	= false;
+				    krestMap.IsVisible	= false;
+				    itmoBilds.IsVisible = false;
+				}
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad1)) {
+				    tileMap.IsVisible	= false;
+				    polyMap.IsVisible	= true;
+				    krestMap.IsVisible	= true;
+				    itmoBilds.IsVisible = true;
+				}
+
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad2)) {
+					krestMap.IsVisible = true;
+				}
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad3)) {
+					krestMap.IsVisible = false;
+				}
+	        }
+
+			if (ControlConfig.Scenario.ToLower() == "novokrest") {
+
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad0))
+					t = 0.0f;
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad1))
+					t = 0.25f;
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad2))
+					t = 0.5f;
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad3))
+					t = 0.75f;
+				if (GameEngine.Keyboard.IsKeyDown(Keys.NumPad4))
+					t = 1.0f;
+
+				float transparency = 1.0f;
+
+				if (t < 0.05f) {
+					transparency = t/0.05f;
+				}
+				if (t > 0.95f) {
+					transparency = 1.0f - (t - 0.95f)/0.05f;
+				}
+				leftTrain.Transparency = transparency;
+				leftTrain.UpdateAnimation(t);
+				rightTrain.Transparency = transparency;
+				rightTrain.UpdateAnimation(t);
+
+				t += dir*gameTime.ElapsedSec/24.0f;
+				if (t > 1.0f) {
+					dir = -1.0f;
+					t	= 1.0f;
+				}
+				if (t < 0) {
+					dir = 1.0f;
+					t	= 0.0f;
+				}
+
+
+				var s = _currentSnapShot as PulseSnapshot;
+		        if (s != null) {
+			        for (int i = 0; i < s.Agents.Count; i++) {
+
+				        var pos = new Vector3((float) s.Agents[i].X, (float)s.Agents[i].Y, 2.7f);
+
+						if (pos.X > -373) pos.Z = 10;
+
+				        if (pos.X > -373 && pos.X < -307.0f) {
+						
+					        float f = (pos.X + 373.0f) /(66.0f);
+						
+							pos.Z = MathUtil.Lerp(2.7f, -35, f);
+				        }
+
+						if (pos.X > -307.0f) pos.Z = - 35;
+
+						subwayAgents.InstancedDataCPU[i] = new ModelLayer.InstancedDataStruct
+						{
+							World = Matrix.Translation(pos)
+						};
+                    }
+					subwayAgents.InstancedCountToDraw = s.Agents.Count;
+		        }
+	        }
+
+
+			//if (_pulseMap != null)
+			//{
+			//    var edges = _pulseMap.Graph.Edges.Values;
+			//    var obstacles = _pulseMap.Levels.First().Value.Obstacles;
+			//    var pois = _pulseMap.Levels.First().Value.PointsOfInterest;
+			//    var t = _textures["circle"];
+			//
+			//    float divider			= 2.0f;
+			//    float offset			= -50.0f;
+			//    float verticalOffset	= -400;
+			//
+			//    foreach (var edge in edges)
+			//    {
+			//        _testLayer.DrawBeam(t, new Vector2((float)edge.NodeFrom.NodeData.Point.X / divider + offset, (float)edge.NodeFrom.NodeData.Point.Y / divider + verticalOffset), new Vector2((float)edge.NodeTo.NodeData.Point.X / divider + offset, (float)edge.NodeTo.NodeData.Point.Y / divider + verticalOffset), Color.White, Color.White, 1f);
+			//    }
+			//}
+
+			return new byte[0];
+        }
+
+        //TODO userinfo & serverinfo protocol
+        public string UserInfo()
+        {
+            return "Todo: userinfo & serverinfo protocol";
+        }
+    }
+}

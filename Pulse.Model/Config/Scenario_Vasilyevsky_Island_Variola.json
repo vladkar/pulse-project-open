@@ -1,0 +1,41 @@
+﻿{
+	"Assembly": "Pulse.Scenery.Krestovsky.dll",
+	"ScenarioName": "Vasilievsky Island, Saint-Petersburg, Variola",
+    "VisName": "СПб В/О   ^2Variola",
+	"DataSubDirectory": "VO",
+	
+	"TimeStep": 1,
+	"ToSecondsMultiplier": 1,
+	"TimeStart": "2014-10-7T07:00:00.000+04:00",
+	
+	"InitialPopulation": 1000,
+	
+	"MapPointDL": {"X": 0, "Y": 0},
+	"MapPointUR": {"X": 10000, "Y": 10000},
+	"ToMetersMultiplier": 1,
+	"GeoPointDL": {"Lat": 59.91612718594394, "Lon": 30.15506603759737},
+    "GeoPointUR": {"Lat": 59.96672508267804, "Lon": 30.32432415527608},
+    "PreferredCoordinates":  "geo",
+	
+    "SimulationType":  "Vasilyevsky",
+
+	"Plugins": {
+		
+		"QuadTree": {
+			"GlobalQuadrantSize": 10000,
+			"QuadrantSizeMin": 5,
+			"QuadrantSizeMan": 200
+		},
+		
+		"RoadGraph": {		
+		},
+
+		
+		"SimpleInfection": {
+			"InfectionName": "variola",
+            "InfectionInitialization":  "children"
+		}
+	},
+
+	"ActivePlugins": ["SimpleInfection"]
+}
